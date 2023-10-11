@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Member">
+	
+	<insert id="signUp">
+		insert into member values(member_seq.nextval,#{email},#{password},#{nickname},#{birthday},sysdate)
+	</insert>
+	
+	<select id="signIn" resultType="boolean">
+		select count(*) from member where email=#{email} and password=#{password}
+	</select>
+	
+	<select id="emailCheck" resultType="boolean">
+		select count(*) from member where email=#{email}
+	</select>
+	
+	<select id="nicknameCheck" resultType="boolean">
+		select count(*) from member where nickname=#{nickname}
+	</select>
+
+</mapper>
