@@ -134,7 +134,6 @@
 		$.ajax({
 			url:"/member/toMailSend",
 			type:"post",
-			async: false,
 			dataType:"json",
 			data:{
 				email:email

@@ -22,7 +22,7 @@ public class RecordController {
 	
 	@Autowired
 	private Gson gson;
-
+	
 	@RequestMapping("toSearchRecord")
 	public String toSearchRecord(String summonerName, Model model) {
 
