@@ -32,7 +32,8 @@ public class RecordService {
 	@Autowired
 	private Gson gson;
 	
-	public String callAPISummonerByName(String summonerName) {
+	// 소환사 이름 검색 정보 가져오기
+	public SummonerInfoDTO callAPISummonerByName(String summonerName) {
 		
 		String serverUrl = "https://kr.api.riotgames.com";
 
@@ -58,17 +59,18 @@ public class RecordService {
 			};
 			String responseBody = httpClient.execute(httpGet, responseHandler);
 
-			SummonerInfoDTO sName = gson.fromJson(responseBody, SummonerInfoDTO.class);
+			SummonerInfoDTO summonerInfoDTO = gson.fromJson(responseBody, SummonerInfoDTO.class);
 
 			System.out.println(responseBody);
 
-			return responseBody;
+			return summonerInfoDTO;
 		} catch(Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 	
+	// 소환사 티어 정보 불러오기
 	public List<SummonerTierDTO> callAPIRankById(String summonerId) {
 		
 		String serverUrl = "https://kr.api.riotgames.com";

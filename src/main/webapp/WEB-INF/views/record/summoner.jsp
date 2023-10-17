@@ -9,55 +9,95 @@
 <!-- jQeury -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- bootstrap -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+	crossorigin="anonymous"></script>
 </head>
 <style>
-container{background-color:blue;}
+container {
+	background-color: blue;
+}
 
-.iconBox{width:30%; height:100%;}
-.summonerBox{width:70%; height:100%;}
-.soloRank{width:50%;}
-.freeRank{width:50%;}
+.iconBox {
+	width: 175px;
+	height: 100%;
+}
+
+.summonerBox {
+	height: 100%;
+}
+
+.iconBox > img {width:150px; height:150px;}
+
+.soloRank {
+	width: 50%;
+}
+
+.freeRank {
+	width: 50%;
+}
 </style>
 <body>
 	<header>
 		<c:import url="../commons/gnb.jsp"></c:import>
 	</header>
 	<main>
-		<div class="container container-fluid shadow p-3 mb-5 bg-body-tertiary rounded">
+		<div
+			class="container container-fluid shadow p-3 mb-5 bg-body-tertiary rounded">
 			<div class="inputBox input-group mb-3">
-				<input class="form-control" type="text" name="summonerName" placeholder="소환사명을 입력해 주세요" aria-label="default input example">
+				<input class="form-control" type="text" name="summonerName"
+					placeholder="소환사명을 입력해 주세요" aria-label="default input example">
 				<button class="btn btn-outline-secondary" id="searchBtn">Button</button>
 			</div>
 			<div class="summonerInfo d-flex flex-row mb-3">
 				<div class="iconBox">
-					아이콘
+					<img src="http://ddragon.leagueoflegends.com/cdn/13.18.1/img/profileicon/${summonerInfo.profileIconId}.png">
 				</div>
 				<div class="summonerBox">
 					<div class="nameBox">
-						이름
+						<span class="badge bg-secondary">${summonerInfo.summonerLevel}</span>
+						<h3 style="font-weight:bold;">${summonerInfo.name}</h3>
 					</div>
-					<div class="updateBox">
-						전적갱신
-					</div>
+					<!-- DB에 저장하는 경우 필요 -->
+					<!-- <div class="updateBox">전적갱신</div> -->
 				</div>
 			</div>
 			<br>
 			<div class="tierInfo d-flex flex-row mb-3">
-				<div class="soloRank">솔로
-					<c:forEach var="i" items="${summonerTier}">
-						<c:if test="${i.queueType.equals('RANKED_SOLO_5x5')}">
-							${i.tier} ${i.rank}
-						</c:if>
-					</c:forEach>
+				<div class="card soloRank">
+					<div class="card-header">솔로 랭크</div>
+					<div class="card-body">
+						<c:forEach var="i" items="${summonerTier}">
+							<c:if test="${i.queueType.equals('RANKED_SOLO_5x5')}">
+								<h5 class="card-title">${i.tier}${i.rank}</h5>
+								${i.leaguePoints}점
+							 	${i.wins}승 ${i.losses}패
+							</c:if>
+						</c:forEach>
+					</div>
 				</div>
-				<div class="freeRank">자유</div>
+				&nbsp;&nbsp;
+				<div class="card freeRank">
+					<div class="card-header">자유 랭크</div>
+					<div class="card-body">
+						<c:forEach var="i" items="${summonerTier}">
+							<c:if test="${i.queueType.equals('RANKED_FLEX_SR')}">
+								<h5 class="card-title">${i.tier}${i.rank}</h5>
+								${i.leaguePoints}점
+							 	${i.wins}승 ${i.losses}패
+							</c:if>
+						</c:forEach>
+					</div>
+				</div>
 			</div>
 			<br>
-			<div class="matchInfo">
-				최근 10경기 정보 보기 ...
-			</div>
+			<div class="matchInfo">최근 10경기 정보 보기 ...</div>
 		</div>
 	</main>
 
