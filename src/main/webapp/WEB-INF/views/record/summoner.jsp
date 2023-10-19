@@ -75,7 +75,7 @@ container {
 					<div class="card-body">
 						<c:forEach var="i" items="${summonerTier}">
 							<c:if test="${i.queueType.equals('RANKED_SOLO_5x5')}">
-								<h5 class="card-title">${i.tier}${i.rank}</h5>
+								<h5 class="card-title">${i.tier} ${i.rank}</h5>
 								${i.leaguePoints}점
 							 	${i.wins}승 ${i.losses}패
 							</c:if>
@@ -88,7 +88,7 @@ container {
 					<div class="card-body">
 						<c:forEach var="i" items="${summonerTier}">
 							<c:if test="${i.queueType.equals('RANKED_FLEX_SR')}">
-								<h5 class="card-title">${i.tier}${i.rank}</h5>
+								<h5 class="card-title">${i.tier} ${i.rank}</h5>
 								${i.leaguePoints}점
 							 	${i.wins}승 ${i.losses}패
 							</c:if>
