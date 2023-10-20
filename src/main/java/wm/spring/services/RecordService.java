@@ -151,7 +151,7 @@ public class RecordService {
 	}
 	
 	// 소환사 최근 매치 10개의 세부 정보 불러오기
-	public String callAPIMatchById(JsonElement summonerMatchId) {
+	public MatchInfoDTO callAPIMatchById(JsonElement summonerMatchId) {
 		try {
 			// summonerMatchId에 포함된 큰따옴표 제거
 			String str = gson.toJson(summonerMatchId).replace("\"", "");
@@ -185,11 +185,9 @@ public class RecordService {
 	            String info = jsonObject.get("info").toString();
 	            
 	            MatchInfoDTO matchInfoDTO = gson.fromJson(info, MatchInfoDTO.class);
-	            System.out.println(matchInfoDTO.getGameMode());
-	            System.out.println(matchInfoDTO.getParticipants().get(0).getChampionName());
-	            System.out.println(matchInfoDTO.getParticipants().get(9).getChampionName());
+	            System.out.println(matchInfoDTO.getParticipants().get(0).getAssists());
 	            
-	            return responseBody;
+	            return matchInfoDTO;
 		}catch(Exception e) {
 			e.printStackTrace();
 			return null;

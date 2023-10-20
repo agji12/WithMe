@@ -33,7 +33,10 @@ container {
 	height: 100%;
 }
 
-.iconBox > img {width:150px; height:150px;}
+.iconBox>img {
+	width: 150px;
+	height: 150px;
+}
 
 .soloRank {
 	width: 50%;
@@ -57,12 +60,13 @@ container {
 			</div>
 			<div class="summonerInfo d-flex flex-row mb-3">
 				<div class="iconBox">
-					<img src="http://ddragon.leagueoflegends.com/cdn/13.18.1/img/profileicon/${summonerInfo.profileIconId}.png">
+					<img
+						src="http://ddragon.leagueoflegends.com/cdn/13.18.1/img/profileicon/${summonerInfo.profileIconId}.png">
 				</div>
 				<div class="summonerBox">
 					<div class="nameBox">
 						<span class="badge bg-secondary">${summonerInfo.summonerLevel}</span>
-						<h3 style="font-weight:bold;">${summonerInfo.name}</h3>
+						<h3 style="font-weight: bold;">${summonerInfo.name}</h3>
 					</div>
 					<!-- DB에 저장하는 경우 필요 -->
 					<!-- <div class="updateBox">전적갱신</div> -->
@@ -75,7 +79,7 @@ container {
 					<div class="card-body">
 						<c:forEach var="i" items="${summonerTier}">
 							<c:if test="${i.queueType.equals('RANKED_SOLO_5x5')}">
-								<h5 class="card-title">${i.tier} ${i.rank}</h5>
+								<h5 class="card-title">${i.tier}${i.rank}</h5>
 								${i.leaguePoints}점
 							 	${i.wins}승 ${i.losses}패
 							</c:if>
@@ -88,7 +92,7 @@ container {
 					<div class="card-body">
 						<c:forEach var="i" items="${summonerTier}">
 							<c:if test="${i.queueType.equals('RANKED_FLEX_SR')}">
-								<h5 class="card-title">${i.tier} ${i.rank}</h5>
+								<h5 class="card-title">${i.tier}${i.rank}</h5>
 								${i.leaguePoints}점
 							 	${i.wins}승 ${i.losses}패
 							</c:if>
@@ -97,10 +101,33 @@ container {
 				</div>
 			</div>
 			<br>
-			<div class="matchInfo">최근 10경기 정보 보기 ...</div>
+			<div class="matchInfo">
+				최근 10경기 정보 보기 ...
+				<div class="card mb-3" style="max-width: 540px;">
+					<div class="row g-0">
+						<div class="col-4">
+							${matchList[0].participants[0].summonerName}
+						</div>
+						<div class="col-8">
+							<div class="card-body">
+								<h5 class="card-title">Card title</h5>
+								<p class="card-text">This is a wider card with supporting
+									text below as a natural lead-in to additional content. This
+									content is a little bit longer.</p>
+								<p class="card-text">
+									<small class="text-body-secondary">Last updated 3 mins
+										ago</small>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				${matchList[0].participants}
+				
+			</div>
 		</div>
 	</main>
 
-
 </body>
+
 </html>
