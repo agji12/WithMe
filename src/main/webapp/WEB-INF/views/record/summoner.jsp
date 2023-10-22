@@ -25,7 +25,7 @@ container {
 }
 
 .iconBox {
-	width: 175px;
+	width: 155px;
 	height: 100%;
 }
 
@@ -33,7 +33,7 @@ container {
 	height: 100%;
 }
 
-.iconBox > img {
+.iconBox>img {
 	width: 130px;
 	height: 130px;
 }
@@ -46,19 +46,22 @@ container {
 	width: 50%;
 }
 
-.matchInfo > .matchCard {
+.matchInfo>.matchCard {
 	/*max-width: 2000px;*/
 	max-height: 150px;
 	over-flow: hidden;
 }
 
-.matchChamInfo {display:flex;}
-.matchChamInfo > div > img {
+.matchPlayInfo > p {margin:auto;}
+
+.matchChamInfo {
+	display: flex;
+}
+
+.matchChamInfo>div>img {
 	width: 70px;
 	height: 70px;
 }
-
-
 </style>
 <body>
 	<header>
@@ -67,11 +70,13 @@ container {
 	<main>
 		<div
 			class="container container-fluid shadow p-3 mb-5 bg-body-tertiary rounded">
-			<div class="inputBox input-group mb-3">
-				<input class="form-control" type="text" name="summonerName"
-					placeholder="소환사명을 입력해 주세요" aria-label="default input example">
-				<button class="btn btn-outline-secondary" id="searchBtn">Button</button>
-			</div>
+			<form action="/record/toSearchRecord" method="post">
+				<div class="inputBox input-group mb-3">
+					<input class="form-control" type="text" name="summonerName"
+						placeholder="소환사명을 입력해 주세요" aria-label="default input example">
+					<button class="btn btn-outline-secondary" id="searchBtn">Button</button>
+				</div>
+			</form>
 			<div class="summonerInfo d-flex flex-row mb-3">
 				<div class="iconBox">
 					<img
@@ -119,67 +124,76 @@ container {
 				최근 10경기 정보 보기 ...
 				<div class="card matchCard mb-3">
 					<div class="row g-0">
-						<div class="col-3">
-							<div class="card-body matchPlayInfo">
-							<c:choose>
-									<c:when test="${matchList[0].queueId == 420}">
-										<p>솔로 랭크</p>
-									</c:when>
-									<c:when test="${matchList[0].queueId == 430}">
-										<p>일반</p>
-									</c:when>
-									<c:when test="${matchList[0].queueId == 440}">
-										<p>자유 랭크</p>
-									</c:when>
-									<c:when test="${matchList[0].queueId == 450}">
-										<p>무작위 총력전</p>
-									</c:when>
-									<c:otherwise>
-										<p>another</p>
-									</c:otherwise>
-								</c:choose>
-								<p>승리 ? 패배 ?</p>
-								<p>${matchList[0].playTimeString}</p>
-								<small class="text-body-secondary">${matchList[0].gameEndTimeString}</small>
-							</div>
-						</div>
-						<div class="col-5">
-							<div class="card-body matchChamInfo">
-								<c:forEach var="i" items="${matchList[0].participants}">
-									<c:if test="${i.summonerName eq summonerInfo.name}">
+						<c:forEach var="i" items="${matchList[0].participants}">
+							<c:if test="${i.summonerName eq summonerInfo.name}">
+								<div class="col-4 col-md-3 col-xl-2">
+									<div class="card-body matchPlayInfo">
+										<c:choose>
+											<c:when test="${matchList[0].queueId == 420}">
+												<p class="queueType">솔로 랭크</p>
+											</c:when>
+											<c:when test="${matchList[0].queueId == 430}">
+												<p class="queueType">일반</p>
+											</c:when>
+											<c:when test="${matchList[0].queueId == 440}">
+												<p class="queueType">자유 랭크</p>
+											</c:when>
+											<c:when test="${matchList[0].queueId == 450}">
+												<p class="queueType">무작위 총력전</p>
+											</c:when>
+											<c:otherwise>
+												<p>another</p>
+											</c:otherwise>
+										</c:choose>
+										<small class="text-body-secondary">${matchList[0].gameEndTimeString}</small>
+										<hr style="margin-top:5px; margin-bottom:5px; width: 120px">
+										<c:choose>
+											<c:when test="${i.win == true}">
+												<small class="text-primary">승리</small><br>
+											</c:when>
+											<c:otherwise>
+												<small class="text-danger">패배</small><br>
+											</c:otherwise>
+										</c:choose>
+										<small class="text-body-secondary">${matchList[0].playTimeString}</small>
+									</div>
+								</div>
+								<div class="col-6 col-md-4 col-lg-3">
+									<div class="card-body matchChamInfo">
 										<div>
-											<img src="https://ddragon.leagueoflegends.com/cdn/${ddragon_ver}/img/champion/${i.championName}.png">
+											<img
+												src="https://ddragon.leagueoflegends.com/cdn/${ddragon_ver}/img/champion/${i.championName}.png">
 										</div>
 										<div>
-											<p>${i.kills} / ${i.deaths} / ${i.assists}</p>
+											<p>${i.kills}/ ${i.deaths} / ${i.assists}</p>
 										</div>
-									</c:if>
-								</c:forEach>
-							</div>
-						</div>
-						<div class="d-none d-md-block col-md-4">
-							<div class="card-body matchParticipants" style="display:flex;">
+									</div>
+								</div>
+							</c:if>
+						</c:forEach>
+						<div class="d-none d-lg-block col-md-5 col-lg-4">
+							<div class="card-body matchParticipants" style="display: flex;">
 								<div class="team1">
 									<c:forEach var="i" items="${matchList[0].participants}">
 										<c:if test="${i.teamId == 100}">
-											<small class="text-body-secondary">${i.summonerName}</small><br>
-										</c:if>	
+											<small class="text-body-secondary">${i.summonerName}</small>
+											<br>
+										</c:if>
 									</c:forEach>
 								</div>
-								<div>&nbsp;&nbsp;vs&nbsp;&nbsp;</div>
+								<div>&nbsp;&nbsp;&nbsp;vs&nbsp;&nbsp;&nbsp;</div>
 								<div class="team2">
 									<c:forEach var="i" items="${matchList[0].participants}">
 										<c:if test="${i.teamId == 200}">
-											<small class="text-body-secondary">${i.summonerName}</small><br>
-										</c:if>	
+											<small class="text-body-secondary">${i.summonerName}</small>
+											<br>
+										</c:if>
 									</c:forEach>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				${matchList[0].participants}
-				
 			</div>
 		</div>
 	</main>

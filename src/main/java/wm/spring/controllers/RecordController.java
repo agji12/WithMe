@@ -29,7 +29,11 @@ public class RecordController {
 	@RequestMapping("toSearchRecord")
 	public String toSearchRecord(String summonerName, Model model) {
 
+		// datadragon-version
+		String ddragon_ver = "13.18.1";
+		
 		// 소환사 이름 검색 정보 (닉네임, 레벨, 아이콘ID)
+		summonerName = summonerName.replaceAll(" ", "%20"); // 공백 제거
 		SummonerInfoDTO summonerInfo = recordService.callAPISummonerByName(summonerName);
 
 		// 소환사 이름 티어 정보 (솔로랭크, 자유랭크)
@@ -47,9 +51,6 @@ public class RecordController {
 		for(int i=0; i < 2; i++) {
 			matchList.add(recordService.callAPIMatchById(summonerMatchId.get(i)));
 		}
-		
-		// datadragon-version
-		String ddragon_ver = "13.18.1";
 		
 		model.addAttribute("summonerName", summonerName);
 		model.addAttribute("summonerInfo", summonerInfo);
