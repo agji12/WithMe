@@ -76,7 +76,6 @@
 									<option value="3">Three</option>
 								</select>
 							</div>
-							
 							<div class="btn-group mb-3" role="group" aria-label="Basic radio toggle button group">
   								<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
   								<label class="btn btn-outline-secondary" for="btnradio1"> * </label>
@@ -96,7 +95,6 @@
   								<input type="radio" class="btn-check" name="btnradio" id="btnradio6" autocomplete="off">
   								<label class="btn btn-outline-secondary" for="btnradio6">Sup</label>
 							</div>
-							
 							<div class="btn-group mb-3" role="group" aria-label="Basic checkbox toggle button group">
   								<input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
   								<label class="btn btn-outline-secondary" for="btncheck1"> * </label>
@@ -116,7 +114,6 @@
   								<input type="checkbox" class="btn-check" id="btncheck6" autocomplete="off">
   								<label class="btn btn-outline-secondary" for="btncheck6">Sup</label>
 							</div>
-							
 							<div class="form-floating mb-3">
 								<textarea class="form-control" placeholder="Leave a comment here" style="height: 100px"></textarea>
 								<label for="floatingTextarea2">메모</label>
@@ -134,7 +131,6 @@
 					</div>
 				</div>
 			</div>
-
 			<div class="mb-3 btnDiv">
 				<button type="button" data-bs-toggle="modal"
 					data-bs-target="#modal" class="btn btn-primary">글 쓰기</button>

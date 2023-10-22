@@ -33,9 +33,9 @@ container {
 	height: 100%;
 }
 
-.iconBox>img {
-	width: 150px;
-	height: 150px;
+.iconBox > img {
+	width: 130px;
+	height: 130px;
 }
 
 .soloRank {
@@ -45,6 +45,20 @@ container {
 .freeRank {
 	width: 50%;
 }
+
+.matchInfo > .matchCard {
+	/*max-width: 2000px;*/
+	max-height: 150px;
+	over-flow: hidden;
+}
+
+.matchChamInfo {display:flex;}
+.matchChamInfo > div > img {
+	width: 70px;
+	height: 70px;
+}
+
+
 </style>
 <body>
 	<header>
@@ -61,7 +75,7 @@ container {
 			<div class="summonerInfo d-flex flex-row mb-3">
 				<div class="iconBox">
 					<img
-						src="http://ddragon.leagueoflegends.com/cdn/13.18.1/img/profileicon/${summonerInfo.profileIconId}.png">
+						src="http://ddragon.leagueoflegends.com/cdn/${ddragon_ver}/img/profileicon/${summonerInfo.profileIconId}.png">
 				</div>
 				<div class="summonerBox">
 					<div class="nameBox">
@@ -103,21 +117,63 @@ container {
 			<br>
 			<div class="matchInfo">
 				최근 10경기 정보 보기 ...
-				<div class="card mb-3" style="max-width: 540px;">
+				<div class="card matchCard mb-3">
 					<div class="row g-0">
-						<div class="col-4">
-							${matchList[0].participants[0].summonerName}
+						<div class="col-3">
+							<div class="card-body matchPlayInfo">
+							<c:choose>
+									<c:when test="${matchList[0].queueId == 420}">
+										<p>솔로 랭크</p>
+									</c:when>
+									<c:when test="${matchList[0].queueId == 430}">
+										<p>일반</p>
+									</c:when>
+									<c:when test="${matchList[0].queueId == 440}">
+										<p>자유 랭크</p>
+									</c:when>
+									<c:when test="${matchList[0].queueId == 450}">
+										<p>무작위 총력전</p>
+									</c:when>
+									<c:otherwise>
+										<p>another</p>
+									</c:otherwise>
+								</c:choose>
+								<p>승리 ? 패배 ?</p>
+								<p>${matchList[0].playTimeString}</p>
+								<small class="text-body-secondary">${matchList[0].gameEndTimeString}</small>
+							</div>
 						</div>
-						<div class="col-8">
-							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
-								<p class="card-text">This is a wider card with supporting
-									text below as a natural lead-in to additional content. This
-									content is a little bit longer.</p>
-								<p class="card-text">
-									<small class="text-body-secondary">Last updated 3 mins
-										ago</small>
-								</p>
+						<div class="col-5">
+							<div class="card-body matchChamInfo">
+								<c:forEach var="i" items="${matchList[0].participants}">
+									<c:if test="${i.summonerName eq summonerInfo.name}">
+										<div>
+											<img src="https://ddragon.leagueoflegends.com/cdn/${ddragon_ver}/img/champion/${i.championName}.png">
+										</div>
+										<div>
+											<p>${i.kills} / ${i.deaths} / ${i.assists}</p>
+										</div>
+									</c:if>
+								</c:forEach>
+							</div>
+						</div>
+						<div class="d-none d-md-block col-md-4">
+							<div class="card-body matchParticipants" style="display:flex;">
+								<div class="team1">
+									<c:forEach var="i" items="${matchList[0].participants}">
+										<c:if test="${i.teamId == 100}">
+											<small class="text-body-secondary">${i.summonerName}</small><br>
+										</c:if>	
+									</c:forEach>
+								</div>
+								<div>&nbsp;&nbsp;vs&nbsp;&nbsp;</div>
+								<div class="team2">
+									<c:forEach var="i" items="${matchList[0].participants}">
+										<c:if test="${i.teamId == 200}">
+											<small class="text-body-secondary">${i.summonerName}</small><br>
+										</c:if>	
+									</c:forEach>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -127,7 +183,5 @@ container {
 			</div>
 		</div>
 	</main>
-
 </body>
-
 </html>

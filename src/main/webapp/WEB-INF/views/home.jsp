@@ -20,9 +20,6 @@
 		<c:import url="commons/gnb.jsp"></c:import>
 	</header>
 	<main>
-		<form action="/toTestJSP" method="post">
-			<button>테스트용</button>
-		</form>
 		<form action="/record/toSearchRecord" method="post">
 			<div class="container">
 				<div class="titleBox">

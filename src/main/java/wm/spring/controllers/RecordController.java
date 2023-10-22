@@ -41,20 +41,21 @@ public class RecordController {
 		JsonArray summonerMatchId = recordService.callAPIMatchIdByPuuid(summonerPuuid);
 		
 		// 소환사 최근 매치 10개의 세부 정보 (게임 시간, 승리팀, 게임 참가자 정보)
-		System.out.println(summonerMatchId);
-		System.out.println(summonerMatchId.get(0));
-		
 		ArrayList<MatchInfoDTO> matchList = new ArrayList<>();
 		
 		// 완성 후 2 -> summonerMatchId.size()
 		for(int i=0; i < 2; i++) {
 			matchList.add(recordService.callAPIMatchById(summonerMatchId.get(i)));
 		}
-
+		
+		// datadragon-version
+		String ddragon_ver = "13.18.1";
+		
 		model.addAttribute("summonerName", summonerName);
 		model.addAttribute("summonerInfo", summonerInfo);
 		model.addAttribute("summonerTier", summonerTier);
 		model.addAttribute("matchList", matchList);
+		model.addAttribute("ddragon_ver", ddragon_ver);
 
 		return "/record/summoner";
 	}

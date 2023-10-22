@@ -2,6 +2,8 @@ package wm.spring.services;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -185,8 +187,16 @@ public class RecordService {
 	            String info = jsonObject.get("info").toString();
 	            
 	            MatchInfoDTO matchInfoDTO = gson.fromJson(info, MatchInfoDTO.class);
-	            System.out.println(matchInfoDTO.getParticipants().get(0).getAssists());
 	            
+	            // 게임 종료 시간 및 게임 플레이 시간 long -> String
+	            Date gameEndTimeDate = new Date(matchInfoDTO.getGameEndTimestamp());
+	            SimpleDateFormat dateFormatEndTime = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	            matchInfoDTO.setGameEndTimeString(dateFormatEndTime.format(gameEndTimeDate));
+	            
+	            Date playTimeDate = new Date(matchInfoDTO.getGameEndTimestamp()-matchInfoDTO.getGameStartTimestamp());
+	            SimpleDateFormat dateFormatPlayTime = new SimpleDateFormat("mm분 ss초");
+	            matchInfoDTO.setPlayTimeString(dateFormatPlayTime.format(playTimeDate));
+            
 	            return matchInfoDTO;
 		}catch(Exception e) {
 			e.printStackTrace();
