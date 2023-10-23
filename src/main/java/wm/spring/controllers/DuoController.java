@@ -19,24 +19,26 @@ public class DuoController {
 	@Autowired
 	private DuoService duoService;
 	
+	// 듀오 찾기 페이지로
 	@RequestMapping("toDuoSearch")
 	public String toDuoSearch() {
 		
 		return "/duo/duoSearch";
 	}
 	
+	// 듀오 찾기 글 db에 insert
 	@RequestMapping("insertDuoSearch")
 	public String insertDuoSearch(DuoDTO dto) {
-		System.out.println(dto.getSummonerName());
-		System.out.println("큐 코드 : " + dto.getQueueCode());
-		System.out.println(dto.getTierCode());
-		System.out.println("주 포지션 : " + dto.getMainPositionCode());
-		System.out.println("찾는 포지션 : " + dto.getSearchingPosition());
-		System.out.println("메모 : " + dto.getMemo());
-		System.out.println(dto.getMicrophone());
 		int memberCode = (int) session.getAttribute("memberCode");
 		dto.setMemberCode(memberCode);
 		duoService.insertDuoSearch(dto);
+		
+		// 마이크 유뮤 값 변경
+		if(dto.getMicrophone() == null) {
+			dto.setMicrophone("F");
+		}else {
+			dto.setMicrophone("T");
+		}
 		
 		return "redirect:/duo/toDuoSearch";
 	}

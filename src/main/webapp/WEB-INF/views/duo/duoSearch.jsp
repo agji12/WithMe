@@ -62,20 +62,20 @@
 							</div>
 							<div class="modal-body">
 								<div class="form-floating mb-3">
-									<input type="text" class="form-control" name="summonerName" placeholder="abc">
+									<input type="text" class="form-control" id="summonerName" name="summonerName" placeholder="abc">
 									<label for="floatingInput">소환사 이름</label>
 								</div>
 								<div class="selectBox mb-3">
-									<select class="form-select" name="queueCode" aria-label="Default select example">
-										<option selected disabled hidden>큐 타입</option>
+									<select class="form-select" id="queueCode" name="queueCode" aria-label="Default select example">
+										<option value="0" selected disabled hidden>큐 타입</option>
 										<option value="1001">일반</option>
 										<option value="1002">솔로 랭크</option>
 										<option value="1003">자유 랭크</option>
 										<option value="1004">무작위 총력전</option>
 									</select>
-									<select class="form-select" name="TierCode"
+									<select class="form-select" id="tierCode" name="tierCode"
 										aria-label="Default select example">
-										<option selected disabled hidden>본인 티어(솔랭기준)</option>
+										<option value="0" selected disabled hidden>본인 티어(솔랭기준)</option>
 										<option value="101">아이언</option>
 										<option value="102">브론즈</option>
 										<option value="103">실버</option>
@@ -88,7 +88,7 @@
 										<option value="110">챌린저</option>
 									</select>
 								</div>
-								<small class="text-body-secondary">주 포지션</small><br>
+								<small class="text-body-secondary">나의 포지션</small><br>
 								<div class="btn-group mb-3" role="group"
 									aria-label="Basic radio toggle button group">
 									<input type="radio" class="btn-check" name="mainPositionCode"
@@ -150,13 +150,13 @@
 								<div class="form-check form-switch">
 									<label class="form-check-label" for="flexSwitchCheckDefault">마이크
 										여부</label> <input class="form-check-input" type="checkbox"
-										role="switch" name="microphone">
+										role="switch" id="microphone" name="microphone">
 								</div>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
 									data-bs-dismiss="modal">취소</button>
-								<button class="btn btn-primary">글 등록하기</button>
+								<button class="btn btn-primary" id="writeBtn">글 등록하기</button>
 							</div>
 						</div>
 					</div>
@@ -177,7 +177,6 @@
 	// 로그인한 경우에만 글 작성 modal 보이도록 설정
 	$(document).ready(function(){
 		let memberCode = '<%=session.getAttribute("memberCode")%>';
-		console.log(memberCode);
 		
 		if(memberCode == "null") {
 			$("#toModal").hide();
@@ -187,6 +186,68 @@
 	
 	$("#toAlert").on("click", function(){
 		alert("로그인 후 진행해 주시기 바랍니다!");
+	})
+	
+	// 듀오 찾기 글 유효성 검사
+	$("#writeBtn").on("click", function(){
+		let writeFlag = true;
+		let summonerName = document.getElementById("summonerName");
+		let queueCode = document.getElementById("queueCode");
+		let tierCode = document.getElementById("tierCode");
+		
+		if(summonerName.value == ""){
+			summonerName.className = "form-control is-invalid";
+			writeFlag = false;
+		}else{
+			summonerName.className = "form-control";
+			writeFlag = true;
+		}
+		
+		if(queueCode.value == 0){
+			queueCode.className = "form-select is-invalid";
+			writeFlag = false;
+		}else{
+			queueCode.className = "form-select";
+			writeFlag = true;
+		}
+		
+		if(tierCode.value == 0){
+			tierCode.className = "form-select is-invalid";
+			writeFlag = false;
+		}else{
+			tierCode.className = "form-select";
+			writeFlag = true;
+		}
+		
+		// 주 포지션 체크 확인
+		let btnradio1 = $("#btnradio1").is(":checked");
+		let btnradio2 = $("#btnradio2").is(":checked");
+		let btnradio3 = $("#btnradio3").is(":checked");
+		let btnradio4 = $("#btnradio4").is(":checked");
+		let btnradio5 = $("#btnradio5").is(":checked");
+		let btnradio6 = $("#btnradio6").is(":checked");
+		
+		if(!btnradio1 && !btnradio2 && !btnradio3 && !btnradio4 && !btnradio5 && !btnradio6){
+			writeFlag = false;
+		}
+		
+		// 찾는 포지션 체크 확인
+		let btncheck1 = $("#btncheck1").is(":checked");
+		let btncheck2 = $("#btncheck2").is(":checked");
+		let btncheck3 = $("#btncheck3").is(":checked");
+		let btncheck4 = $("#btncheck4").is(":checked");
+		let btncheck5 = $("#btncheck5").is(":checked");
+		let btncheck6 = $("#btncheck6").is(":checked");
+		
+		if(!btncheck1 && !btncheck2 && !btncheck3 && !btncheck4 && !btncheck5 && !btncheck6){
+			writeFlag = false;
+		}
+		
+		console.log($("#microphone").is(":checked"));
+		let check = $("#microphone").is(":checked")
+		$("#microphone").val(check);
+		
+		return writeFlag;
 	})
 	
 	
