@@ -91,27 +91,27 @@
 								<small class="text-body-secondary">나의 포지션</small><br>
 								<div class="btn-group mb-3" role="group"
 									aria-label="Basic radio toggle button group">
-									<input type="radio" class="btn-check" name="mainPositionCode"
+									<input type="radio" class="btn-check" name="myPositionCode"
 										id="btnradio1" autocomplete="off" value="0"> <label
 										class="btn btn-outline-secondary" for="btnradio1"> * </label>
 
-									<input type="radio" class="btn-check" name="mainPositionCode"
+									<input type="radio" class="btn-check" name="myPositionCode"
 										id="btnradio2" autocomplete="off" value="1"> <label
 										class="btn btn-outline-secondary" for="btnradio2">Top</label>
 
-									<input type="radio" class="btn-check" name="mainPositionCode"
+									<input type="radio" class="btn-check" name="myPositionCode"
 										id="btnradio3" autocomplete="off" value="2"> <label
 										class="btn btn-outline-secondary" for="btnradio3">Jug</label>
 
-									<input type="radio" class="btn-check" name="mainPositionCode"
+									<input type="radio" class="btn-check" name="myPositionCode"
 										id="btnradio4" autocomplete="off" value="3"> <label
 										class="btn btn-outline-secondary" for="btnradio4">Mid</label>
 
-									<input type="radio" class="btn-check" name="mainPositionCode"
+									<input type="radio" class="btn-check" name="myPositionCode"
 										id="btnradio5" autocomplete="off" value="4"> <label
 										class="btn btn-outline-secondary" for="btnradio5">AD</label>
 									<input
-										type="radio" class="btn-check" name="mainPositionCode" id="btnradio6"
+										type="radio" class="btn-check" name="myPositionCode" id="btnradio6"
 										autocomplete="off" value="5"> <label
 										class="btn btn-outline-secondary" for="btnradio6">Sup</label>
 								</div>

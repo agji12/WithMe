@@ -6,7 +6,7 @@
 <mapper namespace="Duo">
 	
 	<insert id="insertDuoSearch">
-		insert into duo values(duo_seq.nextval,${memberCode},${mainPositionCode},${queueCode},${TierCode},#{summonerName},#{searchingPosition},#{memo},#{microphone},sysdate)
+		insert into duo values(duo_seq.nextval,${memberCode},${myPositionCode},${queueCode},${TierCode},#{summonerName},#{searchingPosition},#{memo},#{microphone},sysdate)
 	</insert>
 	
 </mapper>

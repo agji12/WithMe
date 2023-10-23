@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class DuoDTO {
 	private int duoCode;
 	private int memberCode;
-	private int mainPositionCode;
+	private int myPositionCode;
 	private int queueCode;
 	private int TierCode;
 	private String summonerName;
@@ -15,12 +15,12 @@ public class DuoDTO {
 	private Timestamp regDate;
 	
 	public DuoDTO() {}
-	public DuoDTO(int duoCode, int memberCode, int mainPositionCode, int queueCode, int tierCode, String summonerName,
+	public DuoDTO(int duoCode, int memberCode, int myPositionCode, int queueCode, int tierCode, String summonerName,
 			String searchingPosition, String memo, String microphone, Timestamp regDate) {
 		super();
 		this.duoCode = duoCode;
 		this.memberCode = memberCode;
-		this.mainPositionCode = mainPositionCode;
+		this.myPositionCode = myPositionCode;
 		this.queueCode = queueCode;
 		TierCode = tierCode;
 		this.summonerName = summonerName;
@@ -42,11 +42,11 @@ public class DuoDTO {
 	public void setMemberCode(int memberCode) {
 		this.memberCode = memberCode;
 	}
-	public int getMainPositionCode() {
-		return mainPositionCode;
+	public int getMyPositionCode() {
+		return myPositionCode;
 	}
-	public void setMainPositionCode(int mainPositionCode) {
-		this.mainPositionCode = mainPositionCode;
+	public void setMyPositionCode(int myPositionCode) {
+		this.myPositionCode = myPositionCode;
 	}
 	public int getQueueCode() {
 		return queueCode;
