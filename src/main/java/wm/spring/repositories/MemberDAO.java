@@ -20,6 +20,10 @@ public class MemberDAO {
 		return db.selectOne("Member.signIn", dto);
 	}
 	
+	public MemberDTO selectMemberInfo(String email) {
+		return db.selectOne("Member.selectMemberInfo", email);
+	}
+	
 	public boolean emailCheck(String email) {
 		return db.selectOne("Member.emailCheck", email);
 	}

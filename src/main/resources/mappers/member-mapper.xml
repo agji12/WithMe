@@ -13,6 +13,10 @@
 		select count(*) from member where email=#{email} and password=#{password}
 	</select>
 	
+	<select id="selectMemberInfo" resultType="wm.spring.dto.MemberDTO">
+		select * from member where email=#{email}
+	</select>
+	
 	<select id="emailCheck" resultType="boolean">
 		select count(*) from member where email=#{email}
 	</select>

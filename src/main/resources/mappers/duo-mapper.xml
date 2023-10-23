@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="Duo">
+	
+	<insert id="insertDuoSearch">
+		insert into duo values(duo_seq.nextval,${memberCode},${mainPositionCode},${queueCode},${TierCode},#{summonerName},#{searchingPosition},#{memo},#{microphone},sysdate)
+	</insert>
+	
+</mapper>

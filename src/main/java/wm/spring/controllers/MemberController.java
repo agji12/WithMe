@@ -69,8 +69,9 @@ public class MemberController {
 		boolean signInSuccess = memberService.signIn(dto);
 		
 		if(signInSuccess) {
-			session.setAttribute("email", dto.getEmail());
-			return "redirect:/";			
+			MemberDTO memberInfoDTO = memberService.selectMemberInfo(dto.getEmail());
+			session.setAttribute("memberCode", memberInfoDTO.getMemberCode());
+			return "redirect:/";
 		}else {
 			rttr.addFlashAttribute("signInSuccess", "false");
 			return "redirect:/member/toSignIn";

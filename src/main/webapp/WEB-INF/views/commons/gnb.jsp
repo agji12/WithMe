@@ -15,7 +15,7 @@
 				<li class="nav-item"><a class="nav-link" href="/">홈</a></li>
 				<li class="nav-item"><a class="nav-link" href="/duo/toDuoSearch">듀오 찾기</a></li>
 				<c:choose>
-					<c:when test="${sessionScope.email == null}">
+					<c:when test="${sessionScope.memberCode == null}">
 						<li class="nav-item"><a class="nav-link" href="/member/toSignIn">로그인</a></li>
 					</c:when>
 					<c:otherwise>

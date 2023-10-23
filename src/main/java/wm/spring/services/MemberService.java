@@ -29,6 +29,10 @@ public class MemberService {
 		return memberDAO.signIn(dto);
 	}
 	
+	public MemberDTO selectMemberInfo(String email) {
+		return memberDAO.selectMemberInfo(email);
+	}
+	
 	public boolean emailCheck(String email) {
 		return memberDAO.emailCheck(email);
 	}
