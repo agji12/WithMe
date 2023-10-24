@@ -40,14 +40,39 @@
 	display: flex;
 }
 
-#toAlert{display:none;}
+.selectImg{
+	width:25px;
+	height:25px;
+}
+
+#toAlert {
+	display: none;
+}
+/* 글 리스트 */
+textarea{
+	resize: none;
+}
+.positionImage{
+	width:30px;
+	height:30px;
+}
+
+.tierImage{
+	width:30px;
+	height:30px;
+}
+
+.fontBold {
+	font-weight:bold;
+}
 </style>
 <body>
 	<header>
 		<c:import url="../commons/gnb.jsp"></c:import>
 	</header>
 	<main>
-		<div class="mainContainer container-fluid shadow p-3 mb-5 bg-body-tertiary rounded">
+		<div
+			class="mainContainer container-fluid shadow p-3 mb-5 bg-body-tertiary rounded">
 			<h1 class="mb-3">듀오 찾기</h1>
 			<!-- Modal -->
 			<form action="/duo/insertDuoSearch" method="post">
@@ -62,85 +87,99 @@
 							</div>
 							<div class="modal-body">
 								<div class="form-floating mb-3">
-									<input type="text" class="form-control" id="summonerName" name="summonerName" placeholder="abc">
-									<label for="floatingInput">소환사 이름</label>
+									<input type="text" class="form-control" id="summonerName"
+										name="summonerName" placeholder="abc"> <label
+										for="floatingInput">소환사 이름</label>
 								</div>
 								<div class="selectBox mb-3">
-									<select class="form-select" id="queueCode" name="queueCode" aria-label="Default select example">
+									<select class="form-select" id="queueCode" name="queueCode"
+										aria-label="Default select example">
 										<option value="0" selected disabled hidden>큐 타입</option>
 										<option value="1001">일반</option>
 										<option value="1002">솔로 랭크</option>
 										<option value="1003">자유 랭크</option>
 										<option value="1004">무작위 총력전</option>
-									</select>
-									<select class="form-select" id="tierCode" name="tierCode"
+									</select> <select class="form-select" id="tierCode" name="tierCode"
 										aria-label="Default select example">
-										<option value="0" selected disabled hidden>본인 티어(솔랭기준)</option>
-										<option value="101">아이언</option>
-										<option value="102">브론즈</option>
-										<option value="103">실버</option>
-										<option value="104">골드</option>
-										<option value="105">플래티넘</option>
-										<option value="106">에매랄드</option>
-										<option value="107">다이아몬드</option>
-										<option value="108">마스터</option>
-										<option value="109">그랜드마스터</option>
-										<option value="110">챌린저</option>
+										<option value="0" selected disabled hidden>본인
+											티어(솔랭기준)</option>
+										<option value="101">UNRANK</option>
+										<option value="102">아이언</option>
+										<option value="103">브론즈</option>
+										<option value="104">실버</option>
+										<option value="105">골드</option>
+										<option value="106">플래티넘</option>
+										<option value="107">에매랄드</option>
+										<option value="108">다이아몬드</option>
+										<option value="109">마스터</option>
+										<option value="110">그랜드마스터</option>
+										<option value="111">챌린저</option>
 									</select>
 								</div>
 								<small class="text-body-secondary">나의 포지션</small><br>
 								<div class="btn-group mb-3" role="group"
 									aria-label="Basic radio toggle button group">
-									<input type="radio" class="btn-check" name="myPositionCode"
-										id="btnradio1" autocomplete="off" value="0"> <label
-										class="btn btn-outline-secondary" for="btnradio1"> * </label>
+									<input type="radio" class="btn-check" name="myPositionCode" id="btnradio1" autocomplete="off" value="0">
+									<label class="btn btn-outline-secondary" for="btnradio1">
+										<img class="selectImg" src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-fill.png">
+									</label>
 
-									<input type="radio" class="btn-check" name="myPositionCode"
-										id="btnradio2" autocomplete="off" value="1"> <label
-										class="btn btn-outline-secondary" for="btnradio2">Top</label>
+									<input type="radio" class="btn-check" name="myPositionCode" id="btnradio2" autocomplete="off" value="1">
+									<label class="btn btn-outline-secondary" for="btnradio2">
+										<img class="selectImg" src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-top.png">
+									</label>
 
-									<input type="radio" class="btn-check" name="myPositionCode"
-										id="btnradio3" autocomplete="off" value="2"> <label
-										class="btn btn-outline-secondary" for="btnradio3">Jug</label>
+									<input type="radio" class="btn-check" name="myPositionCode" id="btnradio3" autocomplete="off" value="2">
+									<label class="btn btn-outline-secondary" for="btnradio3">
+										<img class="selectImg" src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-jungle.png">	
+									</label>
 
-									<input type="radio" class="btn-check" name="myPositionCode"
-										id="btnradio4" autocomplete="off" value="3"> <label
-										class="btn btn-outline-secondary" for="btnradio4">Mid</label>
+									<input type="radio" class="btn-check" name="myPositionCode" id="btnradio4" autocomplete="off" value="3">
+									<label class="btn btn-outline-secondary" for="btnradio4">
+										<img class="selectImg" src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-middle.png">	
+									</label>
 
-									<input type="radio" class="btn-check" name="myPositionCode"
-										id="btnradio5" autocomplete="off" value="4"> <label
-										class="btn btn-outline-secondary" for="btnradio5">AD</label>
-									<input
-										type="radio" class="btn-check" name="myPositionCode" id="btnradio6"
-										autocomplete="off" value="5"> <label
-										class="btn btn-outline-secondary" for="btnradio6">Sup</label>
+									<input type="radio" class="btn-check" name="myPositionCode" id="btnradio5" autocomplete="off" value="4">
+									<label class="btn btn-outline-secondary" for="btnradio5">
+										<img class="selectImg" src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-bottom.png">
+									</label>
+									
+									<input type="radio" class="btn-check" name="myPositionCode" id="btnradio6" autocomplete="off" value="5">
+									<label class="btn btn-outline-secondary" for="btnradio6">
+										<img class="selectImg" src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-utility.png">
+									</label>
 								</div>
-								<br>
-								<small class="text-body-secondary">찾는 포지션</small><br>
-								<div class="btn-group mb-3" role="group"
-									aria-label="Basic checkbox toggle button group">
-									<input type="checkbox" class="btn-check" name="searchingPosition" id="btncheck1"
-										autocomplete="off" value="0"> <label
-										class="btn btn-outline-secondary" for="btncheck1"> * </label>
+								<br> <small class="text-body-secondary">찾는 포지션</small><br>
+								<div class="btn-group mb-3" role="group" aria-label="Basic checkbox toggle button group">
+									<input type="checkbox" class="btn-check" name="searchingPosition" id="btncheck1" autocomplete="off" value="0">
+									<label class="btn btn-outline-secondary" for="btncheck1">
+										<img class="selectImg" src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-fill.png">
+									</label>
+									 
+									<input type="checkbox" class="btn-check" name="searchingPosition" id="btncheck2" autocomplete="off" value="1">
+									<label class="btn btn-outline-secondary" for="btncheck2">
+										<img class="selectImg" src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-top.png">
+									</label>
 
-									<input type="checkbox" class="btn-check" name="searchingPosition" id="btncheck2"
-										autocomplete="off" value="1"> <label
-										class="btn btn-outline-secondary" for="btncheck2">Top</label>
+									<input type="checkbox" class="btn-check" name="searchingPosition" id="btncheck3" autocomplete="off" value="2">
+									<label class="btn btn-outline-secondary" for="btncheck3">
+										<img class="selectImg" src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-jungle.png">
+									</label>
+									
+									<input type="checkbox" class="btn-check" name="searchingPosition" id="btncheck4" autocomplete="off" value="3">
+									<label class="btn btn-outline-secondary" for="btncheck4">
+										<img class="selectImg" src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-middle.png">
+									</label>
 
-									<input type="checkbox" class="btn-check" name="searchingPosition" id="btncheck3"
-										autocomplete="off" value="2"> <label
-										class="btn btn-outline-secondary" for="btncheck3">Jug</label>
-
-									<input type="checkbox" class="btn-check" name="searchingPosition" id="btncheck4"
-										autocomplete="off" value="3"> <label
-										class="btn btn-outline-secondary" for="btncheck4">Mid</label>
-
-									<input type="checkbox" class="btn-check" name="searchingPosition" id="btncheck5"
-										autocomplete="off" value="4"> <label
-										class="btn btn-outline-secondary" for="btncheck5">AD</label> <input
-										type="checkbox" class="btn-check" name="searchingPosition" id="btncheck6"
-										autocomplete="off" value="5"> <label
-										class="btn btn-outline-secondary" for="btncheck6">Sup</label>
+									<input type="checkbox" class="btn-check" name="searchingPosition" id="btncheck5" autocomplete="off" value="4">
+									<label class="btn btn-outline-secondary" for="btncheck5">
+										<img class="selectImg" src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-bottom.png">
+									</label>
+									
+									<input type="checkbox" class="btn-check" name="searchingPosition" id="btncheck6" autocomplete="off" value="5">
+									<label class="btn btn-outline-secondary" for="btncheck6">
+										<img class="selectImg" src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-utility.png">
+									</label>
 								</div>
 								<div class="form-floating mb-3">
 									<textarea class="form-control" name="memo"
@@ -162,13 +201,48 @@
 					</div>
 				</div>
 			</form>
-			<div class="mb-3 btnDiv">
+			<div class="mb-5 btnDiv">
 				<button type="button" data-bs-toggle="modal" data-bs-target="#modal"
 					class="btn btn-primary" id="toModal">글 쓰기</button>
-				<button type="button" class="btn btn-primary" id="toAlert">글 쓰기</button>
+				<button type="button" class="btn btn-primary" id="toAlert">글
+					쓰기</button>
 			</div>
 			<!-- 글 List -->
-			<div class="col-12 col-lg-8 mb-3">글들 모음 ..</div>
+			<div class="col-12 col-lg-8 mb-3">
+				<c:forEach var="i" items="${duoList}">
+					<div class="card" style="width: 22rem;">
+						<div class="card-body">
+							<h6 class="fontBold">${i.queueName} 같이 하실 ${i.searchingPosition} 구해요</h6>
+							<div class="mb-2">
+								<c:choose>
+									<c:when test="${i.tierName.equals('UNRANK')}">
+										<small class="fontBold">${i.tierName}</small>
+									</c:when>
+									<c:otherwise>
+										<img class="tierImage" src="/resources/tierImages/${i.tierName}.png"> <small class="fontBold">${i.tierName}</small>
+									</c:otherwise>
+								</c:choose>
+								<br>
+								<img class="positionImage" src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-${i.positionName}.png">
+								<small class="text-body">${i.summonerName}</small>
+								<c:choose>
+									<c:when test="${i.microphone.equals('T')}">
+										<i class="bi bi-mic-fill"></i>
+									</c:when>
+									<c:otherwise>
+										<i class="bi bi-mic-mute-fill"></i>
+									</c:otherwise>
+								</c:choose>
+							</div>
+							<textarea class="form-control" placeholder="Leave a comment here" readonly style="height: 150px; font-size:small;">${i.memo}</textarea>
+							<hr>
+							<!-- 댓글 List -->
+							<div>
+							</div>
+						</div>						
+					</div>
+				</c:forEach>
+			</div>
 		</div>
 	</main>
 </body>
@@ -177,79 +251,87 @@
 	// 로그인한 경우에만 글 작성 modal 보이도록 설정
 	$(document).ready(function(){
 		let memberCode = '<%=session.getAttribute("memberCode")%>';
-		
-		if(memberCode == "null") {
+
+		if (memberCode == "null") {
 			$("#toModal").hide();
 			$("#toAlert").show();
 		}
 	})
-	
-	$("#toAlert").on("click", function(){
+
+	$("#toAlert").on("click", function() {
 		alert("로그인 후 진행해 주시기 바랍니다!");
 	})
-	
+
 	// 듀오 찾기 글 유효성 검사
-	$("#writeBtn").on("click", function(){
-		let writeFlag = true;
-		let summonerName = document.getElementById("summonerName");
-		let queueCode = document.getElementById("queueCode");
-		let tierCode = document.getElementById("tierCode");
-		
-		if(summonerName.value == ""){
-			summonerName.className = "form-control is-invalid";
-			writeFlag = false;
-		}else{
-			summonerName.className = "form-control";
-			writeFlag = true;
-		}
-		
-		if(queueCode.value == 0){
-			queueCode.className = "form-select is-invalid";
-			writeFlag = false;
-		}else{
-			queueCode.className = "form-select";
-			writeFlag = true;
-		}
-		
-		if(tierCode.value == 0){
-			tierCode.className = "form-select is-invalid";
-			writeFlag = false;
-		}else{
-			tierCode.className = "form-select";
-			writeFlag = true;
-		}
-		
-		// 주 포지션 체크 확인
-		let btnradio1 = $("#btnradio1").is(":checked");
-		let btnradio2 = $("#btnradio2").is(":checked");
-		let btnradio3 = $("#btnradio3").is(":checked");
-		let btnradio4 = $("#btnradio4").is(":checked");
-		let btnradio5 = $("#btnradio5").is(":checked");
-		let btnradio6 = $("#btnradio6").is(":checked");
-		
-		if(!btnradio1 && !btnradio2 && !btnradio3 && !btnradio4 && !btnradio5 && !btnradio6){
-			writeFlag = false;
-		}
-		
-		// 찾는 포지션 체크 확인
-		let btncheck1 = $("#btncheck1").is(":checked");
-		let btncheck2 = $("#btncheck2").is(":checked");
-		let btncheck3 = $("#btncheck3").is(":checked");
-		let btncheck4 = $("#btncheck4").is(":checked");
-		let btncheck5 = $("#btncheck5").is(":checked");
-		let btncheck6 = $("#btncheck6").is(":checked");
-		
-		if(!btncheck1 && !btncheck2 && !btncheck3 && !btncheck4 && !btncheck5 && !btncheck6){
-			writeFlag = false;
-		}
-		
-		console.log($("#microphone").is(":checked"));
-		let check = $("#microphone").is(":checked")
-		$("#microphone").val(check);
-		
-		return writeFlag;
-	})
+	$("#writeBtn").on("click", function() {
+				let writeFlag = true;
+				let summonerName = document.getElementById("summonerName");
+				let queueCode = document.getElementById("queueCode");
+				let tierCode = document.getElementById("tierCode");
+
+				if (summonerName.value == "") {
+					summonerName.className = "form-control is-invalid";
+					writeFlag = false;
+				} else {
+					summonerName.className = "form-control";
+					writeFlag = true;
+				}
+
+				if (queueCode.value == 0) {
+					queueCode.className = "form-select is-invalid";
+					writeFlag = false;
+				} else {
+					queueCode.className = "form-select";
+					writeFlag = true;
+				}
+
+				if (tierCode.value == 0) {
+					tierCode.className = "form-select is-invalid";
+					writeFlag = false;
+				} else {
+					tierCode.className = "form-select";
+					writeFlag = true;
+				}
+
+				// 주 포지션 체크 확인
+				let btnradio1 = $("#btnradio1").is(":checked");
+				let btnradio2 = $("#btnradio2").is(":checked");
+				let btnradio3 = $("#btnradio3").is(":checked");
+				let btnradio4 = $("#btnradio4").is(":checked");
+				let btnradio5 = $("#btnradio5").is(":checked");
+				let btnradio6 = $("#btnradio6").is(":checked");
+
+				if (!btnradio1 && !btnradio2 && !btnradio3 && !btnradio4
+						&& !btnradio5 && !btnradio6) {
+					writeFlag = false;
+				}
+
+				// 찾는 포지션 체크 확인
+				let btncheck1 = $("#btncheck1").is(":checked");
+				let btncheck2 = $("#btncheck2").is(":checked");
+				let btncheck3 = $("#btncheck3").is(":checked");
+				let btncheck4 = $("#btncheck4").is(":checked");
+				let btncheck5 = $("#btncheck5").is(":checked");
+				let btncheck6 = $("#btncheck6").is(":checked");
+
+				if (!btncheck1 && !btncheck2 && !btncheck3 && !btncheck4
+						&& !btncheck5 && !btncheck6) {
+					writeFlag = false;
+				}
+
+				console.log($("#microphone").is(":checked"));
+				let check = $("#microphone").is(":checked")
+				$("#microphone").val(check);
+
+				return writeFlag;
+			})
 	
+	// 찾는 포지션 입력
+	function valueTest(v){
+		console.log("aa");
+	}
 	
+
+			
 </script>
 </html>

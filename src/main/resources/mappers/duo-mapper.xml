@@ -9,4 +9,11 @@
 		insert into duo values(duo_seq.nextval,${memberCode},${myPositionCode},${queueCode},${TierCode},#{summonerName},#{searchingPosition},#{memo},#{microphone},sysdate)
 	</insert>
 	
+	<select id="selectDuoSearch" resultType="wm.spring.dto.DuoDTO">
+		select d.*, q.name queuename, t.name tiername, p.name positionname from duo d
+		join QUEUEKIND q on d.queuecode = q.code
+		join TIERKIND t on d.tiercode = t.code
+		join POSITIONKIND p on d.mypositioncode = p.code
+	</select>
+	
 </mapper>
