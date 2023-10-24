@@ -25,7 +25,8 @@
 <style>
 .mainContainer {
 	margin-top: 50px;
-	width: 70%;
+	/*width: 70%;*/
+	width: 1400px;
 }
 
 .btnDiv {
@@ -52,6 +53,13 @@
 textarea{
 	resize: none;
 }
+
+.duoSearcingList{
+	display:flex;
+	flex-direction : row;
+	flex-wrap : wrap;
+}
+
 .positionImage{
 	width:30px;
 	height:30px;
@@ -208,11 +216,12 @@ textarea{
 					쓰기</button>
 			</div>
 			<!-- 글 List -->
-			<div class="col-12 col-lg-8 mb-3">
-				<c:forEach var="i" items="${duoList}">
-					<div class="card" style="width: 22rem;">
+			<div class="duoSearcingList">
+			<c:forEach var="i" items="${duoList}">
+				<div class="col-3 mb-3">
+					<div class="card" style="width: 20rem;">
 						<div class="card-body">
-							<h6 class="fontBold">${i.queueName} 같이 하실 ${i.searchingPosition} 구해요</h6>
+							<h6 class="fontBold"><span class="badge bg-secondary">${i.queueName}</span> ${i.searchingPosition} 구해요</h6>
 							<div class="mb-2">
 								<c:choose>
 									<c:when test="${i.tierName.equals('UNRANK')}">
@@ -237,11 +246,19 @@ textarea{
 							<textarea class="form-control" placeholder="Leave a comment here" readonly style="height: 150px; font-size:small;">${i.memo}</textarea>
 							<hr>
 							<!-- 댓글 List -->
-							<div>
-							</div>
+							<form class="row g-3">
+  								<div class="col-auto">
+    								<label for="inputPassword2" class="visually-hidden">Password</label>
+    								<input type="text" class="form-control" id="inputPassword2" placeholder="Password">
+  									</div>
+  									<div class="col-auto">
+   									<button type="submit" class="btn btn-primary mb-3">a</button>
+									</div>
+								</form>
 						</div>						
 					</div>
-				</c:forEach>
+				</div>
+			</c:forEach>
 			</div>
 		</div>
 	</main>
