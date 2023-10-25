@@ -243,7 +243,7 @@ textarea{
 								</c:choose>
 								<br>
 								<img class="positionImage" src="/resources/positionImages/${i.positionName}.png">
-								<small class="text-body">${i.summonerName} (${i.nickname})</small>
+								<small class="text-body">${i.summonerName} (${i.nickname})</small><small class="text-body-tertiary" style="float:right;">${i.regDateString}</small>
 								<c:choose>
 									<c:when test="${i.microphone.equals('T')}">
 										<i class="bi bi-mic-fill"></i>
@@ -253,7 +253,7 @@ textarea{
 									</c:otherwise>
 								</c:choose>
 							</div>
-							<textarea class="form-control" placeholder="Leave a comment here" readonly style="height: 150px; font-size:small;">${i.memo}</textarea>
+							<textarea class="form-control" readonly style="height: 150px; font-size:small;">${i.memo}</textarea>
 							<hr>
 							<!-- 댓글 List -->
 							<form action="/duo/insertDuoReply" method="post" class="row g-3">
@@ -362,10 +362,7 @@ textarea{
 				return writeFlag;
 			})
 	
-	// 찾는 포지션 입력
-	function valueTest(v){
-		console.log("aa");
-	}
+	
 	
 
 			

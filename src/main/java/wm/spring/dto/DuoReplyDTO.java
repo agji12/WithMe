@@ -9,10 +9,11 @@ public class DuoReplyDTO {
 	private String content;
 	private Timestamp regDate;
 	private String nickname;
+	private String regDateString;
 	
 	public DuoReplyDTO() {}
 	public DuoReplyDTO(int duoReplyCode, int duoCode, int memberCode, String content, Timestamp regDate,
-			String nickname) {
+			String nickname, String regDateString) {
 		super();
 		this.duoReplyCode = duoReplyCode;
 		this.duoCode = duoCode;
@@ -20,6 +21,7 @@ public class DuoReplyDTO {
 		this.content = content;
 		this.regDate = regDate;
 		this.nickname = nickname;
+		this.regDateString = regDateString;
 	}
 
 	public int getDuoReplyCode() {
@@ -57,6 +59,12 @@ public class DuoReplyDTO {
 	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+	public String getRegDateString() {
+		return regDateString;
+	}
+	public void setRegDateString(String regDateString) {
+		this.regDateString = regDateString;
 	}
 	
 }

@@ -1,5 +1,8 @@
 package wm.spring.services;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +25,8 @@ public class DuoService {
 	public List<DuoDTO> selectDuoSearch(){
 		List<DuoDTO> duoDTO = duoDAO.selectDuoSearch();
 		
-		// 찾는 포지션 숫자 -> 한글 변경 (1 -> 탑)
 		for(int i = 0;i < duoDTO.size();i++) {
+			// 찾는 포지션 숫자 -> 한글 변경 (1 -> 탑)
 			String[] position = duoDTO.get(i).getSearchingPosition().split(",");
 			String temp = "";
 			
@@ -48,9 +51,18 @@ public class DuoService {
 					temp += "서폿 ";
 				}
 			}
+			if(temp.equals("탑 정글 미드 원딜 서폿 ")) {
+				temp = "모든 포지션";
+			}
 			duoDTO.get(i).setSearchingPosition(temp);
+			
+			// 듀오 찾기 글 등록일 형식 변경 (Timestamp -> String)
+			Timestamp regDate = duoDTO.get(i).getRegDate();
+			SimpleDateFormat sdf = new SimpleDateFormat("MM-dd");
+			String regDateString = sdf.format(regDate);
+			duoDTO.get(i).setRegDateString(regDateString);
+			
 		}
-		
 		return duoDTO;
 	}
 	
@@ -59,7 +71,17 @@ public class DuoService {
 	}
 	
 	public List<DuoReplyDTO> selectDuoReply() {
-		return duoDAO.selectDuoReply();
+		List<DuoReplyDTO> duoReplyDTO = duoDAO.selectDuoReply();
+		
+		// 댓글 등록일 형식 변경 (Timestamp -> String)
+		for(int i = 0;i < duoReplyDTO.size();i++) {
+			Timestamp regDate = duoReplyDTO.get(i).getRegDate();
+			SimpleDateFormat sdf = new SimpleDateFormat("MM-dd");
+			String regDateString = sdf.format(regDate);
+			duoReplyDTO.get(i).setRegDateString(regDateString);
+		}
+		
+		return duoReplyDTO;
 	}
 	
 }
