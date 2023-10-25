@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import wm.spring.dto.DuoDTO;
+import wm.spring.dto.DuoReplyDTO;
 import wm.spring.services.DuoService;
 
 @Controller
@@ -25,9 +26,14 @@ public class DuoController {
 	// 듀오 찾기 페이지로
 	@RequestMapping("toDuoSearch")
 	public String toDuoSearch(Model model) {
-		List<DuoDTO> duoList =  duoService.selectDuoSearch();
+		// 듀오 찾기 글 가져오기
+		List<DuoDTO> duoList = duoService.selectDuoSearch();
+		
+		// 듀오 찾기 댓글 가져오기
+		List<DuoReplyDTO> duoReplyList = duoService.selectDuoReply();
 		
 		model.addAttribute("duoList", duoList);		
+		model.addAttribute("duoReplyList", duoReplyList);		
 		return "/duo/duoSearch";
 	}
 	
@@ -45,6 +51,13 @@ public class DuoController {
 		}
 		
 		duoService.insertDuoSearch(dto);
+		return "redirect:/duo/toDuoSearch";
+	}
+	
+	// 듀오 찾기 글의 댓글 db에 insert
+	@RequestMapping("insertDuoReply")
+	public String insertDuoReply(DuoReplyDTO dto) {
+		duoService.insertDuoReply(dto);
 		return "redirect:/duo/toDuoSearch";
 	}
 	

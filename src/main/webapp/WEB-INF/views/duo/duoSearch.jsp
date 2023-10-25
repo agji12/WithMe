@@ -25,7 +25,6 @@
 <style>
 .mainContainer {
 	margin-top: 50px;
-	/*width: 70%;*/
 	width: 1400px;
 }
 
@@ -73,6 +72,17 @@ textarea{
 .fontBold {
 	font-weight:bold;
 }
+/* 댓글 리스트 */
+.dashedHr {
+	border-style: dashed;
+	margin-bottom: 8px;
+}
+
+.duoReplyList{
+	height: 73px;
+	overflow-y:auto;
+}
+
 </style>
 <body>
 	<header>
@@ -219,21 +229,21 @@ textarea{
 			<div class="duoSearcingList">
 			<c:forEach var="i" items="${duoList}">
 				<div class="col-3 mb-3">
-					<div class="card" style="width: 20rem;">
+					<div class="card" style="width: 318px;">
 						<div class="card-body">
 							<h6 class="fontBold"><span class="badge bg-secondary">${i.queueName}</span> ${i.searchingPosition} 구해요</h6>
 							<div class="mb-2">
 								<c:choose>
 									<c:when test="${i.tierName.equals('UNRANK')}">
-										<small class="fontBold">${i.tierName}</small>
+										<img class="tierImage" src="/resources/tierImages/none-disabled.png"> <small class="fontBold">${i.tierName}</small>
 									</c:when>
 									<c:otherwise>
 										<img class="tierImage" src="/resources/tierImages/${i.tierName}.png"> <small class="fontBold">${i.tierName}</small>
 									</c:otherwise>
 								</c:choose>
 								<br>
-								<img class="positionImage" src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-${i.positionName}.png">
-								<small class="text-body">${i.summonerName}</small>
+								<img class="positionImage" src="/resources/positionImages/${i.positionName}.png">
+								<small class="text-body">${i.summonerName} (${i.nickname})</small>
 								<c:choose>
 									<c:when test="${i.microphone.equals('T')}">
 										<i class="bi bi-mic-fill"></i>
@@ -246,15 +256,24 @@ textarea{
 							<textarea class="form-control" placeholder="Leave a comment here" readonly style="height: 150px; font-size:small;">${i.memo}</textarea>
 							<hr>
 							<!-- 댓글 List -->
-							<form class="row g-3">
+							<form action="/duo/insertDuoReply" method="post" class="row g-3">
   								<div class="col-auto">
-    								<label for="inputPassword2" class="visually-hidden">Password</label>
-    								<input type="text" class="form-control" id="inputPassword2" placeholder="Password">
-  									</div>
-  									<div class="col-auto">
-   									<button type="submit" class="btn btn-primary mb-3">a</button>
-									</div>
-								</form>
+  									<input type="hidden" name="duoCode" value="${i.duoCode}">
+  									<input type="hidden" name="memberCode" value="${i.memberCode}">
+    								<input type="text" class="form-control" name="content" placeholder="로그인 후 이용해 주세요">
+  								</div>
+  								<div class="col-auto">
+   									<button type="submit" class="btn btn-primary">입력</button>
+								</div>
+							</form>
+							<hr class="dashedHr">
+							<div class="duoReplyList">
+								<c:forEach var="j" items="${duoReplyList}">
+									<c:if test="${j.duoCode == i.duoCode}">
+										<small>${j.nickname}</small> <small class="text-body-secondary">${j.content}</small><br>
+									</c:if>
+								</c:forEach>
+							</div>
 						</div>						
 					</div>
 				</div>

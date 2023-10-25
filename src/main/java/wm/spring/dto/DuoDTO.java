@@ -16,11 +16,12 @@ public class DuoDTO {
 	private String queueName;
 	private String tierName;
 	private String positionName;
+	private String nickname;
 	
 	public DuoDTO() {}
 	public DuoDTO(int duoCode, int memberCode, int myPositionCode, int queueCode, int tierCode, String summonerName,
 			String searchingPosition, String memo, String microphone, Timestamp regDate, String queueName,
-			String tierName, String positionName) {
+			String tierName, String positionName, String nickname) {
 		super();
 		this.duoCode = duoCode;
 		this.memberCode = memberCode;
@@ -35,7 +36,9 @@ public class DuoDTO {
 		this.queueName = queueName;
 		this.tierName = tierName;
 		this.positionName = positionName;
+		this.nickname = nickname;
 	}
+
 
 	public int getDuoCode() {
 		return duoCode;
@@ -114,6 +117,12 @@ public class DuoDTO {
 	}
 	public void setPositionName(String positionName) {
 		this.positionName = positionName;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	
 }

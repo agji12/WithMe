@@ -10,10 +10,22 @@
 	</insert>
 	
 	<select id="selectDuoSearch" resultType="wm.spring.dto.DuoDTO">
-		select d.*, q.name queuename, t.name tiername, p.name positionname from duo d
+		select d.*, m.nickname nickname, q.name queuename, t.name tiername, p.name positionname from duo d
+		join member m on d.membercode = m.membercode
 		join QUEUEKIND q on d.queuecode = q.code
 		join TIERKIND t on d.tiercode = t.code
 		join POSITIONKIND p on d.mypositioncode = p.code
+		order by d.regdate desc
+	</select>
+	
+	<insert id="insertDuoReply">
+		insert into duoreply values(duoreply_seq.nextval,${duoCode},${memberCode},#{content},sysdate)
+	</insert>
+	
+	<select id="selectDuoReply" resultType="wm.spring.dto.DuoReplyDTO">
+		select dr.*,m.nickname from duoreply dr
+		join member m on dr.membercode = m.membercode
+		order by dr.regdate asc
 	</select>
 	
 </mapper>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import wm.spring.dto.DuoDTO;
+import wm.spring.dto.DuoReplyDTO;
 
 @Repository
 public class DuoDAO {
@@ -20,6 +21,14 @@ public class DuoDAO {
 	
 	public List<DuoDTO> selectDuoSearch(){
 		return db.selectList("Duo.selectDuoSearch");
+	}
+	
+	public int insertDuoReply(DuoReplyDTO dto) {
+		return db.insert("Duo.insertDuoReply", dto);
+	}
+	
+	public List<DuoReplyDTO> selectDuoReply() {
+		return db.selectList("Duo.selectDuoReply");
 	}
 	
 }

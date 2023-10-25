@@ -1,12 +1,12 @@
 package wm.spring.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import wm.spring.dto.DuoDTO;
+import wm.spring.dto.DuoReplyDTO;
 import wm.spring.repositories.DuoDAO;
 
 @Service
@@ -52,6 +52,14 @@ public class DuoService {
 		}
 		
 		return duoDTO;
+	}
+	
+	public int insertDuoReply(DuoReplyDTO dto) {
+		return duoDAO.insertDuoReply(dto);
+	}
+	
+	public List<DuoReplyDTO> selectDuoReply() {
+		return duoDAO.selectDuoReply();
 	}
 	
 }
