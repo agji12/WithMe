@@ -41,11 +41,16 @@ container {
 }
 
 .soloRank {
-	width: 50%;
+	width: 400px;
 }
 
 .freeRank {
-	width: 50%;
+	width: 400px;
+}
+
+.tierImage {
+	width:100px;
+	height:100px;
 }
 
 .matchInfo>.matchCard {
@@ -74,7 +79,7 @@ container {
 			class="container container-fluid shadow p-3 mb-5 bg-body-tertiary rounded">
 			<form action="/record/toSearchRecord" method="post">
 				<div class="inputBox input-group mb-3">
-					<input class="form-control" type="text" name="summonerName"
+					<input class="form-control" type="text" id="summonerName" name="summonerName"
 						placeholder="소환사명을 입력해 주세요" aria-label="default input example">
 					<button class="btn btn-outline-secondary" id="searchBtn">Button</button>
 				</div>
@@ -97,12 +102,17 @@ container {
 			<div class="tierInfo d-flex flex-row mb-3">
 				<div class="card soloRank">
 					<div class="card-header">솔로 랭크</div>
-					<div class="card-body">
+					<div class="card-body d-flex justify-content-between">
 						<c:forEach var="i" items="${summonerTier}">
 							<c:if test="${i.queueType.equals('RANKED_SOLO_5x5')}">
-								<h5 class="card-title">${i.tier}${i.rank}</h5>
-								${i.leaguePoints}점
-							 	${i.wins}승 ${i.losses}패
+							<div>
+								<img class="tierImage" src="/resources/tierImages/${i.tier}.png">
+							</div>
+							<div style="text-align:right;">
+								<h5 class="card-title">${i.tier} ${i.rank}</h5>
+								<p>${i.leaguePoints} LP</p>
+							 	<small class="text-body-secondary">${i.wins}승 ${i.losses}패</small>
+							 </div>
 							</c:if>
 						</c:forEach>
 					</div>
@@ -110,12 +120,17 @@ container {
 				&nbsp;&nbsp;
 				<div class="card freeRank">
 					<div class="card-header">자유 랭크</div>
-					<div class="card-body">
+					<div class="card-body d-flex justify-content-between">
 						<c:forEach var="i" items="${summonerTier}">
 							<c:if test="${i.queueType.equals('RANKED_FLEX_SR')}">
-								<h5 class="card-title">${i.tier}${i.rank}</h5>
-								${i.leaguePoints}점
-							 	${i.wins}승 ${i.losses}패
+								<div>
+									<img class="tierImage" src="/resources/tierImages/${i.tier}.png">
+								</div>
+								<div style="text-align:right;">
+									<h5 class="card-title">${i.tier}${i.rank}</h5>
+									<p>${i.leaguePoints} LP</p>
+							 		<small class="text-body-secondary">${i.wins}승 ${i.losses}패</small>
+							 	</div>
 							</c:if>
 						</c:forEach>
 					</div>
@@ -123,7 +138,7 @@ container {
 			</div>
 			<br>
 			<div class="matchInfo">
-				최근 10경기 정보 보기 ...
+				<p style="margin-bottom:4px;">최근 10경기 정보 보기</p>
 				<div class="card matchCard mb-3">
 					<div class="row g-0">
 						<c:forEach var="i" items="${matchList[0].participants}">
@@ -166,9 +181,12 @@ container {
 											<img
 												src="https://ddragon.leagueoflegends.com/cdn/${ddragon_ver}/img/champion/${i.championName}.png">
 										</div>
-										<div>
-											<p>${i.kills}/ ${i.deaths} / ${i.assists}</p>
+										<div style="display:flex;margin-left:30px;">
+											<div class="fs-5 text">${i.kills} /</div>&nbsp;
+											<div class="fs-5 text" style="color:#d91a1a;">${i.deaths}</div>&nbsp;
+											<div class="fs-5 text">/ ${i.assists} </div>
 										</div>
+											<!-- <p>${i.kills}/ ${i.deaths} / ${i.assists}</p> -->
 									</div>
 								</div>
 							</c:if>
@@ -206,4 +224,13 @@ container {
 		</div>
 	</main>
 </body>
+<script>
+	//소환사명 공백 입력 못하도록
+	$("#searchBtn").on("click", function(){
+		if($("#summonerName").val() == ''){
+			alert("소환사명을 입력해 주세요");
+			return false;
+		}
+	})
+</script>
 </html>

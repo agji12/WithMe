@@ -28,7 +28,7 @@
 					<h1>With Me</h1>
 				</div>
 				<div class="inputBox input-group">
-					<input class="form-control" type="text" name="summonerName" placeholder="소환사명을 입력해 주세요" aria-label="default input example">
+					<input class="form-control" type="text" id="summonerName" name="summonerName" placeholder="소환사명을 입력해 주세요" aria-label="default input example">
 					<button class="btn btn-outline-secondary" id="searchBtn">Button</button>
 				</div>
 				<small class="text-body-secondary"><i class="bi bi-info-circle-fill"></i> 한글 이름의 경우 띄어쓰기를 꼭 해주세요!</small>
@@ -36,4 +36,13 @@
 		</form>
 	</main>
 </body>
+<script>
+	// 소환사명 공백 입력 못하도록
+	$("#searchBtn").on("click", function(){
+		if($("#summonerName").val() == ''){
+			alert("소환사명을 입력해 주세요");
+			return false;
+		}
+	})
+</script>
 </html>
