@@ -12,10 +12,15 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet" >
+<!-- Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700&display=swap" rel="stylesheet">
+<!--  home css -->
+<link href="/resources/css/home.css" rel="stylesheet" type="text/css">
+<!--  home js -->
+<script src="/resources/js/home.js" defer></script>
 </head>
-<style>
-	.titleBox{text-align:center;}
-</style>
 <body>
 	<header>
 		<c:import url="commons/gnb.jsp"></c:import>
@@ -24,8 +29,8 @@
 		<br><br>
 		<form action="/record/toSearchRecord" method="post">
 			<div class="container">
-				<div class="titleBox">
-					<h1>With Me</h1>
+				<div class="titleBox m-3">
+					<h1 style="font-weight:bold;">With Me</h1>
 				</div>
 				<div class="inputBox input-group">
 					<input class="form-control" type="text" id="summonerName" name="summonerName" placeholder="소환사명을 입력해 주세요" aria-label="default input example">
@@ -36,13 +41,4 @@
 		</form>
 	</main>
 </body>
-<script>
-	// 소환사명 공백 입력 못하도록
-	$("#searchBtn").on("click", function(){
-		if($("#summonerName").val() == ''){
-			alert("소환사명을 입력해 주세요");
-			return false;
-		}
-	})
-</script>
 </html>

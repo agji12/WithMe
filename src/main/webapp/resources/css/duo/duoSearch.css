@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+*{
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.mainContainer {
+	margin-top: 50px;
+	width: 1400px;
+}
+
+.btnDiv {
+	text-align: right;
+}
+
+.writeBtnDiv {
+	text-align: center;
+}
+
+.selectBox {
+	display: flex;
+}
+
+.selectImg{
+	width:25px;
+	height:25px;
+}
+
+#toAlert {
+	display: none;
+}
+
+/* 글 리스트 */
+textarea{
+	resize: none;
+}
+
+.duoSearcingList{
+	display:flex;
+	flex-direction : row;
+	flex-wrap : wrap;
+}
+
+.positionImage{
+	width:30px;
+	height:30px;
+}
+
+.tierImage{
+	width:30px;
+	height:30px;
+}
+
+.fontBold {
+	font-weight:bold;
+}
+
+/* 댓글 리스트 */
+.dashedHr {
+	border-style: dashed;
+	margin-bottom: 8px;
+}
+
+.duoReplyList{
+	height: 73px;
+	overflow-y:auto;
+}

@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+*{
+	font-family: 'Noto Sans KR', sans-serif;
+}
+.mainContainer{
+	margin-top:50px;
+	width:70%;
+}
+
+.btnDiv{
+	text-align:center;
+}
+	
+.label{
+	font-weight:bold;
+}

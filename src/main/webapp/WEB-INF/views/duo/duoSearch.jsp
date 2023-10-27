@@ -9,81 +9,18 @@
 <!-- jQeury -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- bootstrap -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-	crossorigin="anonymous"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
-	rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet" >
+<!-- Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700&display=swap" rel="stylesheet">
+<!--  duoSearch css -->
+<link href="/resources/css/duo/duoSearch.css" rel="stylesheet" type="text/css">
+<!--  duoSearch js -->
+<script src="/resources/js/duo/duoSearch.js" defer></script>
 </head>
-<style>
-.mainContainer {
-	margin-top: 50px;
-	width: 1400px;
-}
-
-.btnDiv {
-	text-align: right;
-}
-
-.writeBtnDiv {
-	text-align: center;
-}
-
-.selectBox {
-	display: flex;
-}
-
-.selectImg{
-	width:25px;
-	height:25px;
-}
-
-#toAlert {
-	display: none;
-}
-/* 글 리스트 */
-textarea{
-	resize: none;
-}
-
-.duoSearcingList{
-	display:flex;
-	flex-direction : row;
-	flex-wrap : wrap;
-}
-
-.positionImage{
-	width:30px;
-	height:30px;
-}
-
-.tierImage{
-	width:30px;
-	height:30px;
-}
-
-.fontBold {
-	font-weight:bold;
-}
-/* 댓글 리스트 */
-.dashedHr {
-	border-style: dashed;
-	margin-bottom: 8px;
-}
-
-.duoReplyList{
-	height: 73px;
-	overflow-y:auto;
-}
-
-</style>
 <body>
 	<header>
 		<c:import url="../commons/gnb.jsp"></c:import>
@@ -259,8 +196,8 @@ textarea{
 							<form action="/duo/insertDuoReply" method="post" class="row g-3">
   								<div class="col-auto">
   									<input type="hidden" name="duoCode" value="${i.duoCode}">
-  									<input type="hidden" name="memberCode" value="${i.memberCode}">
-    								<input type="text" class="form-control" name="content" placeholder="로그인 후 이용해 주세요">
+  									<input type="hidden" name="memberCode" value="${sessionScope.memberCode}">
+    								<input type="text" class="form-control" name="content" placeholder="로그인 후 이용해 주세요" style="width:200px;">
   								</div>
   								<div class="col-auto">
    									<button type="submit" class="btn btn-primary">입력</button>
@@ -274,7 +211,7 @@ textarea{
 									</c:if>
 								</c:forEach>
 							</div>
-						</div>						
+						</div>
 					</div>
 				</div>
 			</c:forEach>
@@ -283,88 +220,14 @@ textarea{
 	</main>
 </body>
 <script>
-	
-	// 로그인한 경우에만 글 작성 modal 보이도록 설정
+	//로그인한 경우에만 글 작성 modal 보이도록 설정
 	$(document).ready(function(){
 		let memberCode = '<%=session.getAttribute("memberCode")%>';
-
+		console.log(memberCode);
 		if (memberCode == "null") {
 			$("#toModal").hide();
 			$("#toAlert").show();
 		}
 	})
-
-	$("#toAlert").on("click", function() {
-		alert("로그인 후 진행해 주시기 바랍니다!");
-	})
-
-	// 듀오 찾기 글 유효성 검사
-	$("#writeBtn").on("click", function() {
-				let writeFlag = true;
-				let summonerName = document.getElementById("summonerName");
-				let queueCode = document.getElementById("queueCode");
-				let tierCode = document.getElementById("tierCode");
-
-				if (summonerName.value == "") {
-					summonerName.className = "form-control is-invalid";
-					writeFlag = false;
-				} else {
-					summonerName.className = "form-control";
-					writeFlag = true;
-				}
-
-				if (queueCode.value == 0) {
-					queueCode.className = "form-select is-invalid";
-					writeFlag = false;
-				} else {
-					queueCode.className = "form-select";
-					writeFlag = true;
-				}
-
-				if (tierCode.value == 0) {
-					tierCode.className = "form-select is-invalid";
-					writeFlag = false;
-				} else {
-					tierCode.className = "form-select";
-					writeFlag = true;
-				}
-
-				// 주 포지션 체크 확인
-				let btnradio1 = $("#btnradio1").is(":checked");
-				let btnradio2 = $("#btnradio2").is(":checked");
-				let btnradio3 = $("#btnradio3").is(":checked");
-				let btnradio4 = $("#btnradio4").is(":checked");
-				let btnradio5 = $("#btnradio5").is(":checked");
-				let btnradio6 = $("#btnradio6").is(":checked");
-
-				if (!btnradio1 && !btnradio2 && !btnradio3 && !btnradio4
-						&& !btnradio5 && !btnradio6) {
-					writeFlag = false;
-				}
-
-				// 찾는 포지션 체크 확인
-				let btncheck1 = $("#btncheck1").is(":checked");
-				let btncheck2 = $("#btncheck2").is(":checked");
-				let btncheck3 = $("#btncheck3").is(":checked");
-				let btncheck4 = $("#btncheck4").is(":checked");
-				let btncheck5 = $("#btncheck5").is(":checked");
-				let btncheck6 = $("#btncheck6").is(":checked");
-
-				if (!btncheck1 && !btncheck2 && !btncheck3 && !btncheck4
-						&& !btncheck5 && !btncheck6) {
-					writeFlag = false;
-				}
-
-				console.log($("#microphone").is(":checked"));
-				let check = $("#microphone").is(":checked")
-				$("#microphone").val(check);
-
-				return writeFlag;
-			})
-	
-	
-	
-
-			
 </script>
 </html>

@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+*{
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.mainContainer{
+	margin-top:50px;
+	width:70%;
+}
+
+.btnDiv{
+	text-align:center;
+}
+
+#authBtn{
+	display:none;
+}
+	
+.authBox{
+	display:none;
+}
+	
+.secondPage{
+	display:none;
+}
+	
+.thirdPage{
+	display:none;
+}
+	
+.emailCheckPage{
+	display:none;
+}
+	
+.signInSuccessPage{
+	display:none;
+}
+	
+.label{
+	font-weight:bold;
+}
+	
+.birthdayBox{
+	display:flex;
+}

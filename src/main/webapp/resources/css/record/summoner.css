@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+*{
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+container {
+	background-color: blue;
+}
+
+.iconBox {
+	width: 155px;
+	height: 100%;
+}
+
+.summonerBox {
+	height: 100%;
+}
+
+.iconBox>img {
+	width: 130px;
+	height: 130px;
+}
+
+.soloRank {
+	width: 400px;
+}
+
+.freeRank {
+	width: 400px;
+}
+
+.tierImage {
+	width:100px;
+	height:100px;
+}
+
+.matchInfo>.matchCard {
+	max-height: 150px;
+	over-flow: hidden;
+}
+
+.matchPlayInfo > p {
+	margin:auto;
+}
+
+.matchChamInfo {
+	display: flex;
+}
+
+.matchChamInfo>div>img {
+	width: 70px;
+	height: 70px;
+}

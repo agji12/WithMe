@@ -9,23 +9,18 @@
 <!-- jQeury -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- bootstrap -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-	crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet" >
+<!-- Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700&display=swap" rel="stylesheet">
+<!--  signIn css -->
+<link href="/resources/css/member/signIn.css" rel="stylesheet" type="text/css">
+<!--  signIn js -->
+<script src="/resources/js/member/signIn.js" defer></script>
 </head>
-<style>
-	.mainContainer{margin-top:50px; width:70%;}
-	.btnDiv{text-align:center;}
-	.label{font-weight:bold;}
-</style>
-
 <body>
 	<header>
 		<c:import url="../commons/gnb.jsp"></c:import>
@@ -59,26 +54,9 @@
 	</main>
 </body>
 <script>
-	//이메일 유효성 검사
-	$("#email").on("keyup", function(){
-		let regexEmail = /.+?@.+?\.com/;
-		let email = $("#email").val();
-	
-		let resultEmail = regexEmail.exec(email);
-	
-		if(resultEmail){
-			$(".emailValidCheck").html("");
-			$("#sendMailBtn").attr("disabled", false);
-		}else {
-			$(".emailValidCheck").html("<i class='bi bi-exclamation-circle'></i>이메일의 형식이 일치하지 않습니다.").css({"color":"red", "font-size":"small"});
-			$("#sendMailBtn").attr("disabled", true);
-		}
-	})
-
-	// 로그인 정보가 일치하지 않을 때
+	//로그인 정보가 일치하지 않을 때
 	if(${signInSuccess == "false"}){
 		alert("이메일과 비밀번호를 다시 확인하여 주시기 바랍니다!");
 	}
-	
 </script>
 </html>
