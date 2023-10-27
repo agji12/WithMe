@@ -28,8 +28,7 @@
 		<c:import url="../commons/gnb.jsp"></c:import>
 	</header>
 	<main>
-		<div
-			class="container container-fluid shadow p-3 mb-5 bg-body-tertiary rounded">
+		<div class="container shadow p-3 mb-5 bg-body-tertiary rounded" style="margin-top:50px;">
 			<form action="/record/toSearchRecord" method="post">
 				<div class="inputBox input-group mb-3">
 					<input class="form-control" type="text" id="summonerName" name="summonerName"
@@ -52,8 +51,8 @@
 				</div>
 			</div>
 			<br>
-			<div class="tierInfo d-flex flex-row mb-3">
-				<div class="card soloRank">
+			<div class="tierInfo d-md-flex flex-row mb-3">
+				<div class="card rank col-12">
 					<div class="card-header">솔로 랭크</div>
 					<div class="card-body d-flex justify-content-between">
 						<c:forEach var="i" items="${summonerTier}">
@@ -71,7 +70,7 @@
 					</div>
 				</div>
 				&nbsp;&nbsp;
-				<div class="card freeRank">
+				<div class="card rank col-12">
 					<div class="card-header">자유 랭크</div>
 					<div class="card-body d-flex justify-content-between">
 						<c:forEach var="i" items="${summonerTier}">
@@ -144,7 +143,7 @@
 								</div>
 							</c:if>
 						</c:forEach>
-						<div class="d-none d-lg-block col-md-5 col-lg-4">
+						<div class="d-none d-lg-block col-lg-4">
 							<div class="card-body matchParticipants" style="display: flex;">
 								<div class="team1">
 									<c:forEach var="i" items="${matchList[0].participants}">

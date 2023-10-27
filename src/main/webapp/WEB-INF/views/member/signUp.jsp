@@ -26,7 +26,7 @@
 		<c:import url="../commons/gnb.jsp"></c:import>
 	</header>
 	<main>
-		<div class="mainContainer container-fluid shadow p-3 mb-5 bg-body-tertiary rounded">
+		<div class="container shadow p-3 mb-5 bg-body-tertiary rounded" style="margin-top:50px;">
 		<form action="/member/signUp" method="post">
 			<div class="mb-3">
 				<h1 style="font-weight:bold;">With Me 회원 가입</h1>

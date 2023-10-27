@@ -4,10 +4,6 @@
 	font-family: 'Noto Sans KR', sans-serif;
 }
 
-container {
-	background-color: blue;
-}
-
 .iconBox {
 	width: 155px;
 	height: 100%;
@@ -22,12 +18,16 @@ container {
 	height: 130px;
 }
 
-.soloRank {
-	width: 400px;
+@media (max-width: 768px) {
+	.rank {
+		width: 100%;
+	}
 }
 
-.freeRank {
-	width: 400px;
+@media (min-width: 768px) {
+	.rank {
+		width: 50%;
+	}
 }
 
 .tierImage {
