@@ -12,18 +12,6 @@ public class MemberDAO {
 	@Autowired
 	private SqlSessionTemplate db;
 	
-	public int signUp(MemberDTO dto) {
-		return db.insert("Member.signUp", dto);
-	}
-	
-	public boolean signIn(MemberDTO dto) {
-		return db.selectOne("Member.signIn", dto);
-	}
-	
-	public MemberDTO selectMemberInfo(String email) {
-		return db.selectOne("Member.selectMemberInfo", email);
-	}
-	
 	public boolean emailCheck(String email) {
 		return db.selectOne("Member.emailCheck", email);
 	}

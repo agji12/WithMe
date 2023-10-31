@@ -26,9 +26,9 @@
 		<c:import url="commons/gnb.jsp"></c:import>
 	</header>
 	<main>
-		<br><br>
 		<form action="/record/toSearchRecord" method="post">
-			<div class="container">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<div class="container" style="margin-top:50px;">
 				<div class="titleBox m-3">
 					<h1 style="font-weight:bold;">With Me</h1>
 				</div>

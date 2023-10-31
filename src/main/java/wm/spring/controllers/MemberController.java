@@ -19,27 +19,10 @@ import wm.spring.services.MemberService;
 public class MemberController {
 	
 	@Autowired
-	private HttpSession session;
-	
-	@Autowired
 	private MemberService memberService;
 	
 	@Autowired
 	private MailSendService mailSendService;
-	
-	// 로그인 창으로
-	@RequestMapping("toSignIn")
-	public String toSignIn(Model model) {
-		
-		return "/member/signIn";
-	}
-	
-	// 회원가입 창으로
-	@RequestMapping("toSignUp")
-	public String toSignUp() {
-		
-		return "/member/signUp";
-	}
 	
 	// 이메일 인증
 	@ResponseBody
@@ -48,41 +31,6 @@ public class MemberController {
 		String authNumber = mailSendService.sendMail(email);
 		
 		return authNumber;
-	}
-	
-	// 회원가입
-	@RequestMapping("signUp")
-	public String signUp(MemberDTO dto, RedirectAttributes rttr) throws Exception {
-		int signUpSuccess = memberService.signUp(dto);
-		
-		if(signUpSuccess > 0) {			
-			rttr.addFlashAttribute("signUpSuccess", "true");
-			return "redirect:/member/toSignUp";
-		}else {
-			return "error";
-		}
-	}
-	
-	// 로그인
-	@RequestMapping("signIn")
-	public String signIn(MemberDTO dto, RedirectAttributes rttr) throws Exception {
-		boolean signInSuccess = memberService.signIn(dto);
-		
-		if(signInSuccess) {
-			MemberDTO memberInfoDTO = memberService.selectMemberInfo(dto.getEmail());
-			session.setAttribute("memberCode", memberInfoDTO.getMemberCode());
-			return "redirect:/";
-		}else {
-			rttr.addFlashAttribute("signInSuccess", "false");
-			return "redirect:/member/toSignIn";
-		}
-	}
-	
-	// 로그아웃
-	@RequestMapping("signOut")
-	public String signOut() {
-		session.invalidate();
-		return "redirect:/";
 	}
 	
 	// 이메일 중복 체크

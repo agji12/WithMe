@@ -6,15 +6,12 @@
 <mapper namespace="Member">
 	
 	<insert id="signUp">
-		insert into member values(member_seq.nextval,#{email},#{password},#{nickname},#{birthday},sysdate)
+		insert into member values(member_seq.nextval,#{email},#{password},#{nickname},#{birthday},1,'ROLE_USER',sysdate)
 	</insert>
 	
-	<select id="signIn" resultType="boolean">
-		select count(*) from member where email=#{email} and password=#{password}
-	</select>
-	
-	<select id="selectMemberInfo" resultType="wm.spring.dto.MemberDTO">
-		select * from member where email=#{email}
+	<select id="signIn" resultType="java.util.Map">
+		select membercode, email as username, password, nickname, enabled, authority
+		from member where email=#{userid}
 	</select>
 	
 	<select id="emailCheck" resultType="boolean">

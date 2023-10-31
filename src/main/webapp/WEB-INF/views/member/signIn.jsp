@@ -28,6 +28,7 @@
 	<main>
 		<div class="container shadow p-3 mb-5 bg-body-tertiary rounded" style="margin-top:50px;">
 			<h1>With Me 로그인</h1>
+			<div class="mb-3" style="color:red;">${errMsg}</div>
 			<form action="/member/signIn" method="post">
 				<div class="col-12 col-lg-8 mb-3">
 					<label for="exampleFormControlInput1" class="form-label label">이메일 주소</label>
@@ -41,6 +42,7 @@
 				</div>
 				<div class="col-12 col-lg-8 mb-3 btnDiv">
 					<button id="signInBtn" class="btn btn-primary">로그인</button>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				</div>
 				<div class="mb-3">
 					<a class="icon-link icon-link-hover" href="/member/toSignUp">

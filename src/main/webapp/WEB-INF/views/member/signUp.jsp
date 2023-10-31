@@ -28,6 +28,7 @@
 	<main>
 		<div class="container shadow p-3 mb-5 bg-body-tertiary rounded" style="margin-top:50px;">
 		<form action="/member/signUp" method="post">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<div class="mb-3">
 				<h1 style="font-weight:bold;">With Me 회원 가입</h1>
 			</div>

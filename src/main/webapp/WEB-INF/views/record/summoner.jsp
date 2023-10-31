@@ -30,6 +30,7 @@
 	<main>
 		<div class="container shadow p-3 mb-5 bg-body-tertiary rounded" style="margin-top:50px;">
 			<form action="/record/toSearchRecord" method="post">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<div class="inputBox input-group mb-3">
 					<input class="form-control" type="text" id="summonerName" name="summonerName"
 						placeholder="소환사명을 입력해 주세요" aria-label="default input example">

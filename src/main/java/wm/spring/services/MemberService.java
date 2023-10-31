@@ -1,6 +1,7 @@
 package wm.spring.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import wm.spring.commons.EncryptionUtils;
@@ -12,26 +13,6 @@ public class MemberService {
 	
 	@Autowired
 	private MemberDAO memberDAO;
-	
-	public int signUp(MemberDTO dto) throws Exception {
-		// 비밀번호 Sha512 적용
-		String shaPw = EncryptionUtils.sha512(dto.getPassword());
-		dto.setPassword(shaPw);
-		
-		return memberDAO.signUp(dto);
-	}
-	
-	public boolean signIn(MemberDTO dto) throws Exception {
-		// 비밀번호 Sha512 적용
-		String shaPw = EncryptionUtils.sha512(dto.getPassword());
-		dto.setPassword(shaPw);
-		
-		return memberDAO.signIn(dto);
-	}
-	
-	public MemberDTO selectMemberInfo(String email) {
-		return memberDAO.selectMemberInfo(email);
-	}
 	
 	public boolean emailCheck(String email) {
 		return memberDAO.emailCheck(email);

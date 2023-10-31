@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,11 +27,12 @@
 		<c:import url="../commons/gnb.jsp"></c:import>
 	</header>
 	<main>
-		<div
-			class="mainContainer container-fluid shadow p-3 mb-5 bg-body-tertiary rounded">
+		<div class="mainContainer container-fluid shadow p-3 mb-5 bg-body-tertiary rounded">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<h1 class="mb-3">듀오 찾기</h1>
 			<!-- Modal -->
 			<form action="/duo/insertDuoSearch" method="post">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<div class="modal fade" id="modal" tabindex="-1"
 					aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
@@ -157,10 +159,14 @@
 				</div>
 			</form>
 			<div class="mb-5 btnDiv">
-				<button type="button" data-bs-toggle="modal" data-bs-target="#modal"
-					class="btn btn-primary" id="toModal">글 쓰기</button>
-				<button type="button" class="btn btn-primary" id="toAlert">글
+				<sec:authorize access="isAnonymous()">
+					<button type="button" class="btn btn-primary" id="toAlert">글
 					쓰기</button>
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
+					<button type="button" data-bs-toggle="modal" data-bs-target="#modal"
+					class="btn btn-primary" id="toModal">글 쓰기</button>
+				</sec:authorize>
 			</div>
 			<!-- 글 List -->
 			<div class="duoSearcingList">
@@ -219,15 +225,4 @@
 		</div>
 	</main>
 </body>
-<script>
-	//로그인한 경우에만 글 작성 modal 보이도록 설정
-	$(document).ready(function(){
-		let memberCode = '<%=session.getAttribute("memberCode")%>';
-		console.log(memberCode);
-		if (memberCode == "null") {
-			$("#toModal").hide();
-			$("#toAlert").show();
-		}
-	})
-</script>
 </html>
