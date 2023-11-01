@@ -204,5 +204,40 @@ public class RecordService {
 		}
 	}
 	
+	// 소환사 이름 검색 정보 가져오기 test 버전
+		public SummonerInfoDTO test(String summonerName) {
+			try {
+				CloseableHttpClient httpClient = HttpClients.createDefault();
+				HttpGet httpGet = new HttpGet(krServerUrl + "/lol/summoner/v4/summoners/by-name/" + summonerName + "?api_key=" + riotApiKey);
+
+				System.out.println("Executing request " + httpGet.getRequestLine());
+				ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
+
+					@Override
+					public String handleResponse(
+							final HttpResponse response) throws ClientProtocolException, IOException {
+						int status = response.getStatusLine().getStatusCode();
+						if (status >= 200 && status < 300) {
+							HttpEntity entity = response.getEntity();
+							return entity != null ? EntityUtils.toString(entity) : null;
+						} else {
+							throw new ClientProtocolException("Unexpected response status: " + status);
+						}
+					}
+
+				};
+				String responseBody = httpClient.execute(httpGet, responseHandler);
+
+				SummonerInfoDTO summonerInfoDTO = gson.fromJson(responseBody, SummonerInfoDTO.class);
+
+				System.out.println(responseBody);
+
+				return summonerInfoDTO;
+			} catch(Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+	
 	
 }

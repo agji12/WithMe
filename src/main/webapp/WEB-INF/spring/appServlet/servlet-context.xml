@@ -26,12 +26,18 @@
 	<context:component-scan base-package="wm.spring.controllers" />
 	<context:component-scan base-package="wm.spring.security.controller" />
 	
+	<!-- Interceptor -->
 	<interceptors>
 		<interceptor>
 			<mapping path="/**" />
          	<beans:bean
             class="wm.spring.interceptors.ProcessingTimeCheckInterceptor"></beans:bean>
 		</interceptor>
-	</interceptors>	
+	</interceptors>
+	
+	<!-- Swagger -->
+	<beans:bean id="swagger2Config" class="wm.spring.config.SwaggerConfig" />
+    <resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html" />
+    <resources location="classpath:/META-INF/resources/webjars/"  mapping="/webjars/**" />
 	
 </beans:beans>

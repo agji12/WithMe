@@ -26,8 +26,8 @@
 		<c:import url="commons/gnb.jsp"></c:import>
 	</header>
 	<main>
-		<form action="/record/toSearchRecord" method="post">
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		<form action="/record/toSearchRecord" method="get">
+			<!-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> -->
 			<div class="container" style="margin-top:50px;">
 				<div style="text-align:center; color:red;">${errMsg}</div>
 				<div class="titleBox m-3">
@@ -39,6 +39,12 @@
 				</div>
 				<small class="text-body-secondary"><i class="bi bi-info-circle-fill"></i> 한글 이름의 경우 띄어쓰기를 꼭 해주세요!</small>
 			</div>
+		</form>
+		<form action="/record/test" method="post">
+			<div class="inputBox input-group">
+					<input class="form-control" type="text" name="summonerName" placeholder="소환사명을 입력해 주세요" aria-label="default input example">
+					<button class="btn btn-outline-secondary">Button</button>
+				</div>
 		</form>
 	</main>
 </body>

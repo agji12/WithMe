@@ -4,13 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 
+import springfox.documentation.service.ResponseMessage;
 import wm.spring.dto.MatchInfoDTO;
 import wm.spring.dto.SummonerInfoDTO;
 import wm.spring.dto.SummonerTierDTO;
@@ -26,8 +32,8 @@ public class RecordController {
 	@Autowired
 	private Gson gson;
 	
-	@RequestMapping("toSearchRecord")
-	public String toSearchRecord(String summonerName, Model model) {
+	@GetMapping("toSearchRecord")
+	public String toSearchRecord(@RequestParam String summonerName, Model model) {
 
 		// datadragon-version
 		String ddragon_ver = "13.18.1";
@@ -60,5 +66,12 @@ public class RecordController {
 
 		return "/record/summoner";
 	}
-
+	
+	@ResponseBody
+	@RequestMapping("test")
+	public SummonerInfoDTO test(@RequestParam String summonerName, Model model) throws Exception {
+		SummonerInfoDTO test = recordService.test("안녕난은지야");
+		return test;
+	}
+	
 }
