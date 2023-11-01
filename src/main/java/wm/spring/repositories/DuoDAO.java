@@ -13,22 +13,22 @@ import wm.spring.dto.DuoReplyDTO;
 public class DuoDAO {
 
 	@Autowired
-	private SqlSessionTemplate db;
+	private SqlSessionTemplate sqlSession;
 	
 	public int insertDuoSearch(DuoDTO dto) {
-		return db.insert("Duo.insertDuoSearch", dto);
+		return sqlSession.insert("Duo.insertDuoSearch", dto);
 	}
 	
 	public List<DuoDTO> selectDuoSearch(){
-		return db.selectList("Duo.selectDuoSearch");
+		return sqlSession.selectList("Duo.selectDuoSearch");
 	}
 	
 	public int insertDuoReply(DuoReplyDTO dto) {
-		return db.insert("Duo.insertDuoReply", dto);
+		return sqlSession.insert("Duo.insertDuoReply", dto);
 	}
 	
 	public List<DuoReplyDTO> selectDuoReply() {
-		return db.selectList("Duo.selectDuoReply");
+		return sqlSession.selectList("Duo.selectDuoReply");
 	}
 	
 }

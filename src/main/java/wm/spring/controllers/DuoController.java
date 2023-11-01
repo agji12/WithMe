@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import wm.spring.dto.DuoDTO;
 import wm.spring.dto.DuoReplyDTO;
 import wm.spring.services.DuoService;
+import wm.spring.services.MemberService;
 
 @Controller
 @RequestMapping("/duo/")
@@ -22,6 +24,9 @@ public class DuoController {
 	
 	@Autowired
 	private DuoService duoService;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	// 듀오 찾기 페이지로
 	@RequestMapping("toDuoSearch")
@@ -39,8 +44,8 @@ public class DuoController {
 	
 	// 듀오 찾기 글 db에 insert
 	@RequestMapping("insertDuoSearch")
-	public String insertDuoSearch(DuoDTO dto) {
-		int memberCode = (int) session.getAttribute("memberCode");
+	public String insertDuoSearch(DuoDTO dto, Authentication auth) {
+		int memberCode = memberService.selectMemberCode(auth.getName());
 		dto.setMemberCode(memberCode);
 		
 		// 마이크 유뮤 값 변경
@@ -56,7 +61,10 @@ public class DuoController {
 	
 	// 듀오 찾기 글의 댓글 db에 insert
 	@RequestMapping("insertDuoReply")
-	public String insertDuoReply(DuoReplyDTO dto) {
+	public String insertDuoReply(DuoReplyDTO dto, Authentication auth) {
+		int memberCode = memberService.selectMemberCode(auth.getName());
+		dto.setMemberCode(memberCode);
+		
 		duoService.insertDuoReply(dto);
 		return "redirect:/duo/toDuoSearch";
 	}

@@ -24,9 +24,7 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler  {
         UserDTO dto=(UserDTO)auth.getPrincipal();
         
         // 시작페이지로 포워딩
-        //RequestDispatcher rd=request.getRequestDispatcher("/");
-        //rd.forward(request, response);
         response.sendRedirect(request.getContextPath()+ "/");
- 
+        //request.getRequestDispatcher("/").forward(request, response);
     }
 }

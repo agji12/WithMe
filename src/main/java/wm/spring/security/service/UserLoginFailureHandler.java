@@ -23,7 +23,7 @@ public class UserLoginFailureHandler implements AuthenticationFailureHandler {
         
         // forward
         request.getRequestDispatcher(
-                "/WEB-INF/views/member/signIn.jsp")
+        		"/member/toSignIn")
                     .forward(request, response);
     }
 }

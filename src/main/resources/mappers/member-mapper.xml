@@ -21,5 +21,9 @@
 	<select id="nicknameCheck" resultType="boolean">
 		select count(*) from member where nickname=#{nickname}
 	</select>
+	
+	<select id="selectMemberCode" resultType="int">
+		select membercode from member where email=#{email}
+	</select>
 
 </mapper>

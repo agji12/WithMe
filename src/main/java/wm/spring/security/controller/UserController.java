@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import wm.spring.dto.MemberDTO;
@@ -22,13 +23,13 @@ public class UserController {
 	private UserDAO userDAO; 
 
 	// 로그인 페이지로 이동
-	@RequestMapping("/member/toSignIn")
+	@GetMapping("/member/toSignIn")
 	public String toSignIn() {
 		return "/member/signIn";
 	}
 	
 	// 회원가입 페이지로 이동
-	@RequestMapping("/member/toSignUp")
+	@GetMapping("/member/toSignUp")
 	public String toSignUp() {
 		return "/member/signUp";
 	}

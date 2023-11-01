@@ -10,14 +10,18 @@ import wm.spring.dto.MemberDTO;
 public class MemberDAO {
 	
 	@Autowired
-	private SqlSessionTemplate db;
+	private SqlSessionTemplate sqlSession;
 	
 	public boolean emailCheck(String email) {
-		return db.selectOne("Member.emailCheck", email);
+		return sqlSession.selectOne("Member.emailCheck", email);
 	}
 	
 	public boolean nicknameCheck(String nickname) {
-		return db.selectOne("Member.nicknameCheck", nickname);
+		return sqlSession.selectOne("Member.nicknameCheck", nickname);
+	}
+	
+	public int selectMemberCode(String email) {
+		return sqlSession.selectOne("Member.selectMemberCode", email);
 	}
 
 }

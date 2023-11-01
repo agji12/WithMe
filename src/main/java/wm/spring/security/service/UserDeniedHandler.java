@@ -22,8 +22,6 @@ public class UserDeniedHandler implements AccessDeniedHandler {
 				"<i class='bi bi-exclamation-circle'></i> 관리자만 사용할 수 있는 기능입니다.");
 		
 		// forward
-		request.getRequestDispatcher(
-				"/WEB-INF/views/member/signIn.jsp")
-					.forward(request, response);
+		request.getRequestDispatcher("/").forward(request, response);
 	}
 }

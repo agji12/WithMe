@@ -29,6 +29,7 @@
 		<form action="/record/toSearchRecord" method="post">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<div class="container" style="margin-top:50px;">
+				<div style="text-align:center; color:red;">${errMsg}</div>
 				<div class="titleBox m-3">
 					<h1 style="font-weight:bold;">With Me</h1>
 				</div>

@@ -202,7 +202,6 @@
 							<form action="/duo/insertDuoReply" method="post" class="row g-3">
   								<div class="col-auto">
   									<input type="hidden" name="duoCode" value="${i.duoCode}">
-  									<input type="hidden" name="memberCode" value="${sessionScope.memberCode}">
     								<input type="text" class="form-control" name="content" placeholder="로그인 후 이용해 주세요" style="width:200px;">
   								</div>
   								<div class="col-auto">

@@ -22,4 +22,8 @@ public class MemberService {
 		return memberDAO.nicknameCheck(nickname);
 	}
 	
+	public int selectMemberCode(String email) {
+		return memberDAO.selectMemberCode(email);
+	}
+	
 }
