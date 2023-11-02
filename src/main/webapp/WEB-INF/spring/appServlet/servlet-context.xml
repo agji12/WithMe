@@ -24,7 +24,6 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="wm.spring.controllers" />
-	<context:component-scan base-package="wm.spring.security.controller" />
 	
 	<!-- Interceptor -->
 	<interceptors>

@@ -23,7 +23,7 @@ $("#sendMailBtn").on("click", function(){
 				
 	$.ajax({
 		url:"/member/toMailSend",
-		type:"post",
+		type:"get",
 		dataType:"json",
 		data:{
 			email:email
@@ -49,7 +49,7 @@ $("#authBtn").on("click", function(){
 	// 이메일 중복 검사
 	$.ajax({
 		url:"/member/emailCheck",
-		type:"post",
+		type:"get",
 		dataType:"json",
 		data:{
 			email:email
@@ -112,7 +112,7 @@ $("#nickname").on("keyup", function(){
 	// 닉네임 중복 검사
 	$.ajax({
 		url:"/member/nicknameCheck",
-		type:"post",
+		type:"get",
 		dataType:"json",
 		data:{
 			nickname : nickname

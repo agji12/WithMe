@@ -167,9 +167,9 @@
 						</div>
 					</div>
 				</div>
-				<!-- 갱신 버튼 -->
+				<!-- 전적 추가 검색 버튼 -->
 				<div class="card mb-3">
-  					<button type="button" class="btn" style="width:100%;height:100%;">
+  					<button type="button" id="additionalBtn" class="btn" style="width:100%;height:100%;">
   						<i class="fa-solid fa-plus" style="color: #a1a1a1;"></i>
   					</button>
 				</div>
@@ -177,4 +177,11 @@
 		</div>
 	</main>
 </body>
+<script>
+	$("#additionalBtn").on("click", function(){
+		$.ajax({
+			
+		})
+	})
+</script>
 </html>

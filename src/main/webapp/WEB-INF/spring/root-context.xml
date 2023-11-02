@@ -41,7 +41,7 @@
 	</bean>
 	
 	<context:component-scan base-package="wm.spring.services" />
-	<context:component-scan base-package="wm.spring.security.service" />
+	<context:component-scan base-package="wm.spring.security" />
 	<context:component-scan base-package="wm.spring.repositories" />
 	
 	<!-- Gson -->

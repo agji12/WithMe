@@ -19,7 +19,7 @@
 					href="/duo/toDuoSearch">듀오 찾기</a></li>
 				<sec:authorize access="isAnonymous()">
 					<li class="nav-item"><a class="nav-link"
-						href="/member/toSignIn">로그인</a></li>
+						href="/member/signIn">로그인</a></li>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<li class="nav-item"><a class="nav-link" href="#">내 정보</a></li>

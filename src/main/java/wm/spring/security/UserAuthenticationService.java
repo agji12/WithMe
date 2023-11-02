@@ -1,4 +1,4 @@
-package wm.spring.security.service;
+package wm.spring.security;
 
 import java.util.ArrayList;
 import java.util.List;

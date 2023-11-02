@@ -40,12 +40,6 @@
 				<small class="text-body-secondary"><i class="bi bi-info-circle-fill"></i> 한글 이름의 경우 띄어쓰기를 꼭 해주세요!</small>
 			</div>
 		</form>
-		<form action="/record/test" method="post">
-			<div class="inputBox input-group">
-					<input class="form-control" type="text" name="summonerName" placeholder="소환사명을 입력해 주세요" aria-label="default input example">
-					<button class="btn btn-outline-secondary">Button</button>
-				</div>
-		</form>
 	</main>
 </body>
 </html>

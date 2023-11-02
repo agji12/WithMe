@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 
-import springfox.documentation.service.ResponseMessage;
 import wm.spring.dto.MatchInfoDTO;
 import wm.spring.dto.SummonerInfoDTO;
 import wm.spring.dto.SummonerTierDTO;
@@ -33,7 +30,7 @@ public class RecordController {
 	private Gson gson;
 	
 	@GetMapping("toSearchRecord")
-	public String toSearchRecord(@RequestParam String summonerName, Model model) {
+	public String toSearchRecord(String summonerName, Model model) {
 
 		// datadragon-version
 		String ddragon_ver = "13.18.1";
@@ -48,7 +45,7 @@ public class RecordController {
 		
 		// 소환사 최근 매치 10개의 ID 정보
 		String summonerPuuid = summonerInfo.getPuuid();
-		JsonArray summonerMatchId = recordService.callAPIMatchIdByPuuid(summonerPuuid);
+		JsonArray summonerMatchId = recordService.callAPIMatchIdByPuuid(summonerPuuid, 0, 10);
 		
 		// 소환사 최근 매치 10개의 세부 정보 (게임 시간, 승리팀, 게임 참가자 정보)
 		ArrayList<MatchInfoDTO> matchList = new ArrayList<>();
@@ -68,10 +65,8 @@ public class RecordController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("test")
-	public SummonerInfoDTO test(@RequestParam String summonerName, Model model) throws Exception {
-		SummonerInfoDTO test = recordService.test("안녕난은지야");
-		return test;
+	public String plusMatch() {
+		return "";
 	}
 	
 }

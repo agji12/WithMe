@@ -21,13 +21,12 @@
 			access="isAuthenticated()" />
 		<intercept-url pattern="/record/**" access="permitAll" />
 		<intercept-url pattern="/duo/**" access="permitAll" />
-		<intercept-url pattern="/member/toSignIn" access="permitAll" />
 		<intercept-url pattern="/member/signIn" access="permitAll" />
 		<intercept-url pattern="/admin/**"
 			access="hasRole('ROLE_ADMIN')" />
 
 		<!-- 로그인 폼 -->
-		<form-login login-page="/member/toSignIn"
+		<form-login login-page="/member/signIn"
 			login-processing-url="/member/signIn"
 			authentication-success-handler-ref="userLoginSuccessHandler"
 			authentication-failure-handler-ref="userLoginFailureHandler"
@@ -38,7 +37,7 @@
 		
 		<!-- 로그아웃 폼 -->
 		<logout logout-url="/member/signOut"
-			logout-success-url="/member/toSignIn"
+			logout-success-url="/member/signIn"
 			delete-cookies="JSESSIONID,SPRING_SECURITY_REMEMBER_ME_COOKIE"
 			invalidate-session="true" />
 
@@ -48,15 +47,15 @@
 	</http>
 
 	<beans:bean id="userDeniedHandler"
-		class="wm.spring.security.service.UserDeniedHandler" />
+		class="wm.spring.security.UserDeniedHandler" />
 	<beans:bean id="userLoginSuccessHandler"
-		class="wm.spring.security.service.UserLoginSuccessHandler" />
+		class="wm.spring.security.UserLoginSuccessHandler" />
 	<beans:bean id="userLoginFailureHandler"
-		class="wm.spring.security.service.UserLoginFailureHandler" />
+		class="wm.spring.security.UserLoginFailureHandler" />
 
 	<!-- 로그인 인증 처리 -->
 	<beans:bean id="userService"
-		class="wm.spring.security.service.UserAuthenticationService">
+		class="wm.spring.security.UserAuthenticationService">
 		<beans:constructor-arg name="sqlSession"
 			ref="sqlSession" />
 	</beans:bean>

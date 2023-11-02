@@ -2,12 +2,12 @@ package wm.spring.controllers;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import wm.spring.dto.DuoDTO;
@@ -20,16 +20,13 @@ import wm.spring.services.MemberService;
 public class DuoController {
 	
 	@Autowired
-	private HttpSession session;
-	
-	@Autowired
 	private DuoService duoService;
 	
 	@Autowired
 	private MemberService memberService;
 	
 	// 듀오 찾기 페이지로
-	@RequestMapping("toDuoSearch")
+	@GetMapping("toDuoSearch")
 	public String toDuoSearch(Model model) {
 		// 듀오 찾기 글 가져오기
 		List<DuoDTO> duoList = duoService.selectDuoSearch();
@@ -43,7 +40,7 @@ public class DuoController {
 	}
 	
 	// 듀오 찾기 글 db에 insert
-	@RequestMapping("insertDuoSearch")
+	@PostMapping("insertDuoSearch")
 	public String insertDuoSearch(DuoDTO dto, Authentication auth) {
 		int memberCode = memberService.selectMemberCode(auth.getName());
 		dto.setMemberCode(memberCode);
@@ -60,7 +57,7 @@ public class DuoController {
 	}
 	
 	// 듀오 찾기 글의 댓글 db에 insert
-	@RequestMapping("insertDuoReply")
+	@PostMapping("insertDuoReply")
 	public String insertDuoReply(DuoReplyDTO dto, Authentication auth) {
 		int memberCode = memberService.selectMemberCode(auth.getName());
 		dto.setMemberCode(memberCode);
