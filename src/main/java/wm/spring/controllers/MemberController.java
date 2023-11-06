@@ -3,8 +3,6 @@ package wm.spring.controllers;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.inject.Inject;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import wm.spring.dto.MemberDTO;
 import wm.spring.security.UserDAO;
@@ -49,7 +48,7 @@ public class MemberController {
 
 	// 회원가입 처리
 	@PostMapping("signUp")
-	public String signUp(MemberDTO dto) {
+	public String signUp(MemberDTO dto, RedirectAttributes rttr) {
 		// 비밀번호 암호화
 		dto.setPassword(bcryptPasswordEncoder.encode(dto.getPassword()));
 
@@ -59,9 +58,13 @@ public class MemberController {
 		map.put("nickname", dto.getNickname());
 		map.put("birthday", dto.getBirthday());
 
-		int result=userDAO.insertUser(map);
-
-		return "/member/signIn";
+		int signUpSuccess = userDAO.insertUser(map);
+		if(signUpSuccess > 0) {			
+			rttr.addFlashAttribute("signUpSuccess", "true");
+			return "redirect:/member/signUp";
+		}else {
+			return "error";
+		}
 	}
 
 	// 관리자 페이지   

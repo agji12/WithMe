@@ -2,14 +2,14 @@ package wm.spring.security;
 
 import java.util.Map;
 
-import javax.inject.Inject;
-
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
-	@Inject
+	
+	@Autowired
 	private SqlSessionTemplate sqlSession;
 
 	@Override

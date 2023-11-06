@@ -51,7 +51,7 @@ public class RecordController {
 		ArrayList<MatchInfoDTO> matchList = new ArrayList<>();
 		
 		// 완성 후 2 -> summonerMatchId.size()
-		for(int i=0; i < 2; i++) {
+		for(int i=0; i < summonerMatchId.size(); i++) {
 			matchList.add(recordService.callAPIMatchById(summonerMatchId.get(i)));
 		}
 		
@@ -65,8 +65,19 @@ public class RecordController {
 	}
 	
 	@ResponseBody
-	public String plusMatch() {
-		return "";
+	@GetMapping("additionalMatch")
+	public List<MatchInfoDTO> additionalMatch(@RequestParam String summonerPuuid, @RequestParam int start, @RequestParam int count) {
+		// 추가 매치 5개의 ID 정보
+		ArrayList<MatchInfoDTO> addtionalMatchList = new ArrayList<>();
+		
+		// 추가 매치 5개의 세부 정보
+		JsonArray summonerMatchId = recordService.callAPIMatchIdByPuuid(summonerPuuid, start, count);
+		
+		for(int i=0; i < summonerMatchId.size(); i++) {
+			addtionalMatchList.add(recordService.callAPIMatchById(summonerMatchId.get(i)));
+		}
+		
+		return addtionalMatchList;
 	}
 	
 }

@@ -44,6 +44,7 @@
 				</div>
 				<div class="summonerBox">
 					<div class="nameBox">
+						<input type="hidden" id="summonerInfoName" value="${summonerInfo.name}">
 						<span class="badge bg-secondary">${summonerInfo.summonerLevel}</span>
 						<h3 style="font-weight: bold;">${summonerInfo.name}</h3>
 					</div>
@@ -92,32 +93,36 @@
 			<br>
 			<div class="matchInfo">
 				<p style="margin-bottom:4px;">최근 10경기 정보 보기</p>
+				<c:forEach var="j" items="${matchList}">
 				<div class="card matchCard mb-3">
 					<div class="row g-0">
-						<c:forEach var="i" items="${matchList[0].participants}">
+						<c:forEach var="i" items="${j.participants}">
 							<c:if test="${i.summonerName eq summonerInfo.name}">
 								<div class="col-4 col-md-3 col-xl-2">
 									<div class="card-body matchPlayInfo">
 										<c:choose>
-											<c:when test="${matchList[0].queueId == 420}">
+											<c:when test="${j.queueId == 420}">
 												<p class="queueType">솔로 랭크</p>
 											</c:when>
-											<c:when test="${matchList[0].queueId == 430}">
+											<c:when test="${j.queueId == 430}">
 												<p class="queueType">일반</p>
 											</c:when>
-											<c:when test="${matchList[0].queueId == 440}">
+											<c:when test="${j.queueId == 440}">
 												<p class="queueType">자유 랭크</p>
 											</c:when>
-											<c:when test="${matchList[0].queueId == 450}">
+											<c:when test="${j.queueId == 450}">
 												<p class="queueType">무작위 총력전</p>
 											</c:when>
 											<c:otherwise>
 												<p>another</p>
 											</c:otherwise>
 										</c:choose>
-										<small class="text-body-secondary">${matchList[0].gameEndTimeString}</small>
+										<small class="text-body-secondary">${j.gameEndTimeString}</small>
 										<hr style="margin-top:5px; margin-bottom:5px; width: 120px">
 										<c:choose>
+											<c:when test="${i.teamEarlySurrendered == true}">
+												<small class="text-secondary">다시하기</small><br>
+											</c:when>
 											<c:when test="${i.win == true}">
 												<small class="text-primary">승리</small><br>
 											</c:when>
@@ -125,10 +130,10 @@
 												<small class="text-danger">패배</small><br>
 											</c:otherwise>
 										</c:choose>
-										<small class="text-body-secondary">${matchList[0].playTimeString}</small>
+										<small class="text-body-secondary">${j.playTimeString}</small>
 									</div>
 								</div>
-								<div class="col-6 col-md-4 col-lg-3">
+								<div class="col-6 col-md-5 col-lg-3">
 									<div class="card-body matchChamInfo">
 										<div>
 											<img
@@ -139,7 +144,6 @@
 											<div class="fs-5 text" style="color:#d91a1a;">${i.deaths}</div>&nbsp;
 											<div class="fs-5 text">/ ${i.assists} </div>
 										</div>
-											<!-- <p>${i.kills}/ ${i.deaths} / ${i.assists}</p> -->
 									</div>
 								</div>
 							</c:if>
@@ -147,7 +151,7 @@
 						<div class="d-none d-lg-block col-lg-4">
 							<div class="card-body matchParticipants" style="display: flex;">
 								<div class="team1">
-									<c:forEach var="i" items="${matchList[0].participants}">
+									<c:forEach var="i" items="${j.participants}">
 										<c:if test="${i.teamId == 100}">
 											<small class="text-body-secondary">${i.summonerName}</small>
 											<br>
@@ -156,7 +160,7 @@
 								</div>
 								<div>&nbsp;&nbsp;&nbsp;vs&nbsp;&nbsp;&nbsp;</div>
 								<div class="team2">
-									<c:forEach var="i" items="${matchList[0].participants}">
+									<c:forEach var="i" items="${j.participants}">
 										<c:if test="${i.teamId == 200}">
 											<small class="text-body-secondary">${i.summonerName}</small>
 											<br>
@@ -167,20 +171,107 @@
 						</div>
 					</div>
 				</div>
-				<!-- 전적 추가 검색 버튼 -->
-				<div class="card mb-3">
-  					<button type="button" id="additionalBtn" class="btn" style="width:100%;height:100%;">
-  						<i class="fa-solid fa-plus" style="color: #a1a1a1;"></i>
-  					</button>
-				</div>
+				</c:forEach>
+			</div>
+			<!-- 전적 추가 검색 버튼 -->
+			<div class="card mb-3">
+				<input type="hidden" id="summonerPuuid" value="${summonerInfo.puuid}">
+  				<button type="button" id="additionalMatchBtn" class="btn" style="width:100%;height:100%;">
+  					<i class="fa-solid fa-plus" style="color: #a1a1a1;"></i>
+  				</button>
 			</div>
 		</div>
 	</main>
 </body>
 <script>
-	$("#additionalBtn").on("click", function(){
+	let start = 10;
+	let count = 5;
+	
+	$("#additionalMatchBtn").on("click", function(){
+		let summonerPuuid = $("#summonerPuuid").val();
+		let summonerInfoName = $("#summonerInfoName").val();
+		
 		$.ajax({
+			url:"/record/additionalMatch",
+			type:"get",
+			dataType:"json",
+			data:{
+				summonerPuuid : summonerPuuid,
+				start : start,
+				count : count
+			}
+		}).done(function(resp){
+			let row = "";
 			
+			for(let j=0;j < resp.length;j++){
+				row += '<div class="card matchCard mb-3">';
+				row += '<div class="row g-0">';
+				for(let i=0;i < resp[j].participants.length;i++){
+					if(resp[j].participants[i].summonerName == summonerInfoName){
+						row +=	'<div class="col-4 col-md-3 col-xl-2">';
+						row +=	'<div class="card-body matchPlayInfo">';
+						if(resp[j].queueId == 420){
+							row += '<p class="queueType">솔로 랭크</p>';
+						}else if(resp[j].queueId == 430){
+							row += '<p class="queueType">일반</p>';
+						}else if(resp[j].queueId == 440){
+							row += '<p class="queueType">자유 랭크</p>';
+						}else if(resp[j].queueId == 450){
+							row += '<p class="queueType">무작위 총력전</p>';
+						}else{
+							row += '<p>another</p>';
+						}
+						row += '<small class="text-body-secondary">' + resp[j].gameEndTimeString + '</small>';
+						row += '<hr style="margin-top:5px; margin-bottom:5px; width: 120px">';
+						if(resp[j].participants[i].win == true){
+							row += '<small class="text-primary">승리</small><br>';
+						}else {
+							row += '<small class="text-danger">패배</small><br>';
+						}
+						row += '<small class="text-body-secondary">' + resp[j].playTimeString + '</small>';
+						row +=	'</div>';		
+						row +=	'</div>';
+						row += '<div class="col-6 col-md-5 col-lg-3">';
+						row += '<div class="card-body matchChamInfo">';
+						row += '<div>';
+						row += '<img src="https://ddragon.leagueoflegends.com/cdn/${ddragon_ver}/img/champion/' + resp[j].participants[i].championName + '.png">';
+						row += '</div>';
+						row += '<div style="display:flex;margin-left:30px;">';
+						row += '<div class="fs-5 text">' + resp[j].participants[i].kills + ' /</div>&nbsp;';
+						row += '<div class="fs-5 text" style="color:#d91a1a;">' + resp[j].participants[i].deaths + '</div>&nbsp;';
+						row += '<div class="fs-5 text">/ ' + resp[j].participants[i].assists + '</div>';
+						row += '</div>';
+						row += '</div>';
+						row += '</div>';
+					}
+				}
+				row += '<div class="d-none d-lg-block col-lg-4">';
+				row += '<div class="card-body matchParticipants" style="display: flex;">';
+				row += '<div class="team1">';
+				for(let i=0;i < resp[j].participants.length;i++){
+					if(resp[j].participants[i].teamId == 100){
+						row += '<small class="text-body-secondary">' + resp[j].participants[i].summonerName + '</small><br>';
+					}
+				}
+				row += '</div>';
+				row += '<div>&nbsp;&nbsp;&nbsp;vs&nbsp;&nbsp;&nbsp;</div>';
+				row += '<div class="team2">';
+				for(let i=0;i < resp[j].participants.length;i++){
+					if(resp[j].participants[i].teamId == 200){
+						row += '<small class="text-body-secondary">' + resp[j].participants[i].summonerName + '</small><br>';
+					}
+				}
+				row += '</div>';
+				row += '</div>';
+				row += '</div>';
+				row += '</div>';
+				row += '</div>';
+			}
+			
+			$(".matchInfo").append(row);
+			
+			// start 값 늘려주기
+			start += 5;
 		})
 	})
 </script>

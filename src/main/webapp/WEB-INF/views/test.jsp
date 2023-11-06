@@ -23,6 +23,7 @@
         <sec:csrfInput/>
         <button type="submit">로그아웃</button>
     </form>
+    <div id="test"></div>
 </sec:authorize>
 </body>
 </html>

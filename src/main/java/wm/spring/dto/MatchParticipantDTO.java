@@ -10,11 +10,12 @@ public class MatchParticipantDTO {
 	private int summonerLevel;
 	private String summonerName;
 	private int teamId;
+	private boolean teamEarlySurrendered;
 	private boolean win;
 	
 	public MatchParticipantDTO() {}
 	public MatchParticipantDTO(int assists, int champLevel, int championId, String championName, int deaths, int kills,
-			int summonerLevel, String summonerName, int teamId, boolean win) {
+			int summonerLevel, String summonerName, int teamId, boolean teamEarlySurrendered, boolean win) {
 		super();
 		this.assists = assists;
 		this.champLevel = champLevel;
@@ -25,6 +26,7 @@ public class MatchParticipantDTO {
 		this.summonerLevel = summonerLevel;
 		this.summonerName = summonerName;
 		this.teamId = teamId;
+		this.teamEarlySurrendered = teamEarlySurrendered;
 		this.win = win;
 	}
 	
@@ -81,6 +83,12 @@ public class MatchParticipantDTO {
 	}
 	public void setTeamId(int teamId) {
 		this.teamId = teamId;
+	}
+	public boolean isTeamEarlySurrendered() {
+		return teamEarlySurrendered;
+	}
+	public void setTeamEarlySurrendered(boolean teamEarlySurrendered) {
+		this.teamEarlySurrendered = teamEarlySurrendered;
 	}
 	public boolean isWin() {
 		return win;
