@@ -54,6 +54,8 @@
 				<value>classpath:/key/RiotApiKey.properties</value>
 				<!-- 이메일 인증 -->
 				<value>classpath:/config/Mail.properties</value>
+				<!-- Jwt -->
+				<value>classpath:/config/Jwt.properties</value>				
 			</list>
 		</property>
 	</bean>
@@ -76,5 +78,11 @@
             </props>
         </property>
     </bean>
+    
+    <context:component-scan base-package="wm.spring.config">
+	 	<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+	 	<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+	 	<context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+	</context:component-scan>
 	
 </beans>

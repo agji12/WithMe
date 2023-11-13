@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import wm.spring.dto.MemberDTO;
-import wm.spring.security.UserDAO;
 import wm.spring.services.MailSendService;
 import wm.spring.services.MemberService;
 
@@ -25,8 +24,8 @@ public class MemberController {
 	@Autowired
 	private PasswordEncoder bcryptPasswordEncoder;
 
-	@Autowired
-	private UserDAO userDAO;
+	//@Autowired
+	//private UserDAO userDAO;
 
 	@Autowired
 	private MemberService memberService;
@@ -57,7 +56,7 @@ public class MemberController {
 		map.put("password", dto.getPassword());
 		map.put("nickname", dto.getNickname());
 		map.put("birthday", dto.getBirthday());
-
+		/*
 		int signUpSuccess = userDAO.insertUser(map);
 		if(signUpSuccess > 0) {			
 			rttr.addFlashAttribute("signUpSuccess", "true");
@@ -65,6 +64,8 @@ public class MemberController {
 		}else {
 			return "error";
 		}
+		*/
+		return "";
 	}
 
 	// 관리자 페이지   

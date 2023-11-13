@@ -1,4 +1,4 @@
-package wm.spring.security;
+package wm.spring.config.auth;
 
 import java.util.Collection;
 

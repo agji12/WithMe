@@ -77,7 +77,7 @@ build/
 src/main/resources/config/DB.properties
 src/main/resources/config/Mail.properties
 src/main/resources/config/RiotApiUrl.properties
-src/main/resources/config/JWT.properties
+src/main/resources/config/Jwt.properties
 
 ### API KEY ###
 src/main/resources/key/RiotApiKey.properties

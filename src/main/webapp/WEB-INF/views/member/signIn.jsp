@@ -29,10 +29,10 @@
 		<div class="container shadow p-3 mb-5 bg-body-tertiary rounded" style="margin-top:50px;">
 			<h1>With Me 로그인</h1>
 			<div class="mb-3" style="color:red;">${errMsg}</div>
-			<form action="/member/signIn" method="post">
+			<form action="/login" method="post">
 				<div class="col-12 col-lg-8 mb-3">
 					<label for="exampleFormControlInput1" class="form-label label">이메일 주소</label>
-					<input type="text" id="email" name="email" class="form-control" placeholder="name@example.com">
+					<input type="text" id="email" name="username" class="form-control" placeholder="name@example.com">
 					<div class="emailValidCheck"></div>
 				</div>
 				<div class="col-12 col-lg-8 mb-3">

@@ -11,7 +11,7 @@
 	
 	<select id="signIn" resultType="java.util.Map">
 		select membercode, email as username, password, nickname, enabled, authority
-		from member where email=#{userid}
+		from member where email=#{username}
 	</select>
 	
 	<select id="emailCheck" resultType="boolean">
