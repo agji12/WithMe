@@ -7,9 +7,24 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<!-- Api key -->
+				<value>classpath:/key/RiotApiKey.properties</value>
+				<!-- DB -->
+				<value>classpath:/config/DB.properties</value>
+				<!-- 이메일 인증 -->
+				<value>classpath:/config/Mail.properties</value>
+				<!-- Jwt -->
+				<value>classpath:/config/Jwt.properties</value>				
+			</list>
+		</property>
+	</bean>
+	
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
-		<property name="username" value="WM" />
-		<property name="password" value="WM" />
+		<property name="username" value="${db.id}" />
+		<property name="password" value="${db.pw}" />
 		<property name="jdbcUrl"
 			value="jdbc:oracle:thin:@localhost:1521:xe" />
 		<property name="driverClassName"
@@ -46,19 +61,6 @@
 	
 	<!-- Gson -->
 	<bean class="com.google.gson.Gson" />
-	
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="locations">
-			<list>
-				<!-- Api key -->
-				<value>classpath:/key/RiotApiKey.properties</value>
-				<!-- 이메일 인증 -->
-				<value>classpath:/config/Mail.properties</value>
-				<!-- Jwt -->
-				<value>classpath:/config/Jwt.properties</value>				
-			</list>
-		</property>
-	</bean>
 	
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="smtp.gmail.com" />

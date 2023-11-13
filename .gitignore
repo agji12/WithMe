@@ -73,6 +73,9 @@ build/
 # $ git config --global mergetool.keepBackup false
 *.orig
 
+### Jwt ###
+src/main/java/wm/spring/config/jwt/JwtProperties
+
 ### CONFIG ###
 src/main/resources/config/DB.properties
 src/main/resources/config/Mail.properties

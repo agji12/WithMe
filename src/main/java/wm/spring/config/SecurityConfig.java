@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import wm.spring.config.jwt.JwtAuthenticationFilter;
+import wm.spring.config.jwt.JwtAuthorizationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -27,7 +29,7 @@ public class SecurityConfig {
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
+	
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		System.out.println("durl");
@@ -44,7 +46,7 @@ public class SecurityConfig {
 				.and()
 				.authorizeRequests(authroize -> authroize.antMatchers("/api/v1/user/**")
 						.access("hasRole('ROLE_USER')or hasRole('ROLE_ADMIN')")
-						.antMatchers("/api/v1/admin/**")
+						.antMatchers("/member/admin/**")
 						.access("hasRole('ROLE_ADMIN')")
 						.anyRequest().permitAll())
 				.build();
@@ -57,7 +59,7 @@ public class SecurityConfig {
 			http
 					.addFilter(corsConfig.corsFilter()) // 인증x : @CrossOrigin, 인증o : 시큐리티 필터에 등록
 					.addFilter(new JwtAuthenticationFilter(authenticationManager));
-					//.addFilter(new JwtAuthorizationFilter(authenticationManager, userRepository));
+					//.addFilter(new JwtAuthorizationFilter(authenticationManager));
 		}
 	}
 	
