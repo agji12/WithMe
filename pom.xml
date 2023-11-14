@@ -139,6 +139,22 @@
 			<version>5.0.1</version>
 		</dependency>
 
+		<!-- JPA -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>5.6.10.Final</version>
+		</dependency>
+
+
+
+
 		<!-- MyBatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -227,7 +243,7 @@
 			<version>1.18.24</version>
 			<scope>provided</scope>
 		</dependency>
-	
+
 		<!-- Jackson -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>

@@ -32,7 +32,7 @@
 			<form action="/login" method="post">
 				<div class="col-12 col-lg-8 mb-3">
 					<label for="exampleFormControlInput1" class="form-label label">이메일 주소</label>
-					<input type="text" id="email" name="username" class="form-control" placeholder="name@example.com">
+					<input type="text" id="username" name="username" class="form-control" placeholder="name@example.com">
 					<div class="emailValidCheck"></div>
 				</div>
 				<div class="col-12 col-lg-8 mb-3">
@@ -60,5 +60,26 @@
 	if(${signInSuccess == "false"}){
 		alert("이메일과 비밀번호를 다시 확인하여 주시기 바랍니다!");
 	}
+	/*
+	$("#signInBtn").on("click", function(){
+		let username = $("#username").val();
+		let password = $("#password").val();
+		let param  = {"username":username,"password":password};
+		var token = localStorage.getItem("token");
+		
+		$.ajax({
+			url:"/login",
+			type:"post",
+			dataType:"json",
+			data:JSON.stringify(param),
+			headers:{
+				"Content-Type": "application/json; charset=utf-8"
+			},
+	        success: function (res) {
+	            console.log(res);
+	        }
+		})
+	})
+	*/
 </script>
 </html>

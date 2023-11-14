@@ -1,5 +1,7 @@
 package wm.spring.services;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,10 @@ public class MemberService {
 	
 	@Autowired
 	private MemberDAO memberDAO;
+	
+	public int insertUser(Map<String, String> map) {
+		return memberDAO.insertUser(map);
+	}
 	
 	public boolean emailCheck(String email) {
 		return memberDAO.emailCheck(email);

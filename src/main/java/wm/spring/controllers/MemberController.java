@@ -24,9 +24,6 @@ public class MemberController {
 	@Autowired
 	private PasswordEncoder bcryptPasswordEncoder;
 
-	//@Autowired
-	//private UserDAO userDAO;
-
 	@Autowired
 	private MemberService memberService;
 
@@ -56,16 +53,15 @@ public class MemberController {
 		map.put("password", dto.getPassword());
 		map.put("nickname", dto.getNickname());
 		map.put("birthday", dto.getBirthday());
-		/*
-		int signUpSuccess = userDAO.insertUser(map);
+		map.put("authority", "ROLE_USER");
+		
+		int signUpSuccess = memberService.insertUser(map);
 		if(signUpSuccess > 0) {			
 			rttr.addFlashAttribute("signUpSuccess", "true");
 			return "redirect:/member/signUp";
 		}else {
 			return "error";
 		}
-		*/
-		return "";
 	}
 
 	// 관리자 페이지   

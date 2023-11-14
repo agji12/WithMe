@@ -8,20 +8,24 @@ public class MemberDTO {
 	private String password;
 	private String nickname;
 	private String birthday;
+	private int enabled;
+	private String Authority;
 	private Timestamp regDate;
 	
 	public MemberDTO() {}
-	public MemberDTO(int memberCode, String email, String password, String nickname, String birthday,
-			Timestamp regDate) {
+	public MemberDTO(int memberCode, String email, String password, String nickname, String birthday, int enabled,
+			String authority, Timestamp regDate) {
 		super();
 		this.memberCode = memberCode;
 		this.email = email;
 		this.password = password;
 		this.nickname = nickname;
 		this.birthday = birthday;
+		this.enabled = enabled;
+		Authority = authority;
 		this.regDate = regDate;
 	}
-	
+
 	public int getMemberCode() {
 		return memberCode;
 	}
@@ -51,6 +55,18 @@ public class MemberDTO {
 	}
 	public void setBirthday(String birthday) {
 		this.birthday = birthday;
+	}
+	public int getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
+	}
+	public String getAuthority() {
+		return Authority;
+	}
+	public void setAuthority(String authority) {
+		Authority = authority;
 	}
 	public Timestamp getRegDate() {
 		return regDate;

@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -14,13 +13,14 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import wm.spring.config.jwt.JwtAuthenticationFilter;
 import wm.spring.config.jwt.JwtAuthorizationFilter;
+import wm.spring.repositories.MemberDAO;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 	
-	//@Autowired
-	//private UserRepository userRepository;
+	@Autowired
+	private MemberDAO memberDAO;
 
 	@Autowired
 	private CorsConfig corsConfig;
@@ -32,23 +32,25 @@ public class SecurityConfig {
 	
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		System.out.println("durl");
 		return http
-				.csrf().disable()
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // stateless 서버
-				.and()
-				.formLogin().disable()
-				//.formLogin()
-				// .loginProcessingUrl("/login")
+				//.csrf().disable()
+				//.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // stateless 서버
 				//.and()
-				.httpBasic().disable()
-				.apply(new MyCustomDsl()) // 커스텀 필터 등록
-				.and()
-				.authorizeRequests(authroize -> authroize.antMatchers("/api/v1/user/**")
+				//.formLogin().disable()
+				//.httpBasic().disable()
+				//.apply(new MyCustomDsl()) // 커스텀 필터 등록
+				//.and()
+				.authorizeRequests(authroize -> authroize
+						.antMatchers("/test/**")
 						.access("hasRole('ROLE_USER')or hasRole('ROLE_ADMIN')")
 						.antMatchers("/member/admin/**")
 						.access("hasRole('ROLE_ADMIN')")
 						.anyRequest().permitAll())
+				//.successHandler(auth2SuccessHandler)
+				.formLogin()
+				.loginProcessingUrl("/login")
+				.defaultSuccessUrl("/")
+				.and()
 				.build();
 	}
 	
@@ -58,8 +60,8 @@ public class SecurityConfig {
 			AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
 			http
 					.addFilter(corsConfig.corsFilter()) // 인증x : @CrossOrigin, 인증o : 시큐리티 필터에 등록
-					.addFilter(new JwtAuthenticationFilter(authenticationManager));
-					//.addFilter(new JwtAuthorizationFilter(authenticationManager));
+					.addFilter(new JwtAuthenticationFilter(authenticationManager))
+					.addFilter(new JwtAuthorizationFilter(authenticationManager, memberDAO));
 		}
 	}
 	
